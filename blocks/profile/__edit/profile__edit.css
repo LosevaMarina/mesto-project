@@ -8,10 +8,11 @@
     background-size: 15px;
     background-repeat: no-repeat;
     background-position: center;
-    cursor: pointer;
+    
 }
 
 .profile__edit:hover {
     transition: 0.5s ease;
     opacity: 0.6;
+    cursor: pointer;
 }

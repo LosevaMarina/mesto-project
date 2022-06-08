@@ -1,0 +1,13 @@
+.element__like {
+    background-image: url(../../../images/heard.svg);
+    background-repeat: no-repeat;
+    background-size: contain; 
+    min-width: 22px;
+    min-height: 19px;
+}
+
+.element__like:hover {
+    transition: 0.5s ease;
+    opacity: 0.6;
+    cursor: pointer;
+}
