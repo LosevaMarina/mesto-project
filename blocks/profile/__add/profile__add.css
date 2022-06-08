@@ -1,0 +1,18 @@
+.profile__add {
+    width: 150px;
+    height: 50px;
+    border: 2px #fff solid;
+    border-radius: 2%;
+    padding: 0;
+    background-image: url(../../../images/plus.svg);
+    background-color: black;
+    background-size: 22px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+}
+
+.profile__add:hover {
+    transition: 0.5s ease;
+    opacity: 0.6;
+}
