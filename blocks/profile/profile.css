@@ -1,0 +1,7 @@
+.profile {
+    border: 1px red solid;
+    max-width: 880px;
+    margin: 0 auto;
+    margin-top: 36.25px;
+    display: flex;
+}
