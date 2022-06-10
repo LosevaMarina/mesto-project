@@ -5,3 +5,11 @@
     font-size: 18px;
     line-height: 22px;
 }
+
+@media (min-width: 320px) and (max-width: 768px)
+{
+.profile__proffesion {
+    font-size: 14px;
+    line-height: 17px;
+}
+}

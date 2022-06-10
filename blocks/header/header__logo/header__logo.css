@@ -1,7 +1,24 @@
 .header__logo {
-    max-width: 142px;
+    width: 142px;
     height: 33px;
     background-repeat: no-repeat;
     margin: 0;
     padding-bottom: 40px;
+}
+
+@media (max-width: 900px)
+{
+.header__logo {
+    margin-left: 27px;
+}
+}
+
+@media (min-width: 320px) and (max-width: 768px)
+{
+.header__logo {
+    width: 103.74px;
+    height: 24.4px;
+    margin-left: 27px;
+    padding-bottom: 31.6px;
+}
 }

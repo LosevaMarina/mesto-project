@@ -9,11 +9,20 @@
     background-size: 22px;
     background-repeat: no-repeat;
     background-position: center;
-    
 }
 
 .profile__add:hover {
     transition: 0.5s ease;
     opacity: 0.6;
     cursor: pointer;
+}
+
+@media (min-width: 320px) and (max-width: 768px)
+{
+.profile__add {
+    width: 282px;
+    height: 50px;
+    background-size: 16px;
+    margin-top: 36px;
+}
 }

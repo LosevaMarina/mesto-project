@@ -1,18 +1,26 @@
 .profile__edit {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     margin-bottom: 8px;
-    margin-left: 16px;
     border: 1px #fff solid;
     background-image: url(../../../images/pansel.svg);
-    background-size: 15px;
+    background-size: 10px;
     background-repeat: no-repeat;
     background-position: center;
-    
 }
 
 .profile__edit:hover {
     transition: 0.5s ease;
     opacity: 0.6;
     cursor: pointer;
+}
+
+@media (min-width: 320px) and (max-width: 768px)
+{
+.profile__edit {
+    width: 16px;
+    height: 16px;
+    margin-bottom: 6px;
+    background-size: 7.5px;
+}
 }

@@ -4,3 +4,18 @@
     line-height: 22px;
     color: #545454;
 }
+
+@media (max-width: 900px)
+{
+.footer__copyright {
+    margin-left: 19px;
+}
+}
+
+@media (min-width: 320px) and (max-width: 768px)
+{
+.footer__copyright {
+    font-size: 14px;
+    line-height: 17px;
+}
+}

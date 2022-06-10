@@ -1,8 +1,30 @@
 .profile__info {
     margin: 0;
     margin-right: 244px;
-    max-width: 336px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 294px 24px;
+    gap: 16px 18px;
+    align-items: end;
 }
+
+@media (max-width: 900px)
+{
+.profile__info {
+    margin-right: 50px;
+    margin-left: 50px;
+}
+}
+
+@media (min-width: 320px) and (max-width: 768px)
+{
+.profile__info {
+    margin-top: 22.25px;
+    margin-left: 65px;
+    display: grid;
+    justify-items: center;
+    align-items: end;
+    gap: 14px 10px;
+    grid-template-columns: 189px 18px;
+}
+}
+

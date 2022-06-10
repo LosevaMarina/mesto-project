@@ -1,6 +1,7 @@
 .element {
-    /*max-width: 282px;*/
-    width: 100%;
+    width: 282px;
+    height: 361px;
+    /*width: 100%;*/
     background-color: #FFF;
     border-radius: 10px;
     overflow: hidden;
