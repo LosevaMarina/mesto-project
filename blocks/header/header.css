@@ -4,10 +4,10 @@
     border-bottom: 1px rgb(33%, 33%, 33%, 0.7) solid;
 }
 
-@media (max-width: 768px)
+@media (max-width: 950px)
 {
 .header {
-    width: 100%;
+    max-width: 100%;
     margin: 28px auto 0;
 }
 }

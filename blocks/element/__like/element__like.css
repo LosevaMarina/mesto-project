@@ -4,10 +4,11 @@
     background-size: contain; 
     min-width: 22px;
     min-height: 19px;
+    border: none;
 }
 
 .element__like:hover {
     transition: 0.5s ease;
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: pointer;
 }

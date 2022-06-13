@@ -7,22 +7,19 @@
     align-items: end;
 }
 
-@media (max-width: 900px)
+@media (max-width: 950px)
 {
 .profile__info {
-    margin-right: 50px;
-    margin-left: 50px;
+    margin: 22.25px 0 36px 43px;
+    justify-items: center
 }
 }
 
 @media (min-width: 320px) and (max-width: 768px)
 {
-.profile__info {
-    margin-top: 22.25px;
-    margin-left: 65px;
-    display: grid;
+.profile__info {    
+    margin: 22.25px 0 36px 26px;
     justify-items: center;
-    align-items: end;
     gap: 14px 10px;
     grid-template-columns: 189px 18px;
 }

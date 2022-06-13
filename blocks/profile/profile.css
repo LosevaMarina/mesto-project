@@ -7,18 +7,9 @@
     align-items: center;
 }
 
-@media (max-width: 900px)
+@media (min-width: 320px) and (max-width: 950px)
 {
 .profile {
-    width: calc(100% - 54px);
-    justify-content: center;
-}
-}
-
-@media (min-width: 320px) and (max-width: 768px)
-{
-.profile {
-    display: flex;
     flex-direction: column;
     margin-top: 38.25px;
 }
