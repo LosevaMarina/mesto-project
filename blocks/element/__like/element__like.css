@@ -2,6 +2,7 @@
     background-image: url(../../../images/heard.svg);
     background-repeat: no-repeat;
     background-size: contain; 
+    background-color: transparent;
     min-width: 22px;
     min-height: 19px;
     border: none;

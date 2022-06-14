@@ -1,27 +1,14 @@
 .profile__info {
     margin: 0;
     margin-right: 244px;
-    display: grid;
-    grid-template-columns: 294px 24px;
-    gap: 16px 18px;
-    align-items: end;
+    display: flex;
+    flex-direction: column;
 }
 
 @media (max-width: 950px)
 {
 .profile__info {
-    margin: 22.25px 0 36px 43px;
-    justify-items: center
-}
-}
+    margin: 22.25px auto 36px;
 
-@media (min-width: 320px) and (max-width: 768px)
-{
-.profile__info {    
-    margin: 22.25px 0 36px 26px;
-    justify-items: center;
-    gap: 14px 10px;
-    grid-template-columns: 189px 18px;
 }
 }
-
