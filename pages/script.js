@@ -28,7 +28,7 @@ function closePopup(popup) {
   popup.classList.remove('popup_active');
 }
 
-buttonClose.addEventListener('click', closePopup);
+buttonClose.addEventListener('click', closePopup(popups));
 
 
 
