@@ -2,6 +2,7 @@ let buttonRedact = document.querySelector('.profile__edit');
 let buttonClose = document.querySelector('.popup__close');
 let buttonAdd = document.querySelector('.profile__add');
 let popup = document.querySelector('.popup');
+let popupCard = document.querySelector('.popup_card')
 let buttonSave = document.querySelector('.popup__save');
 
 //открыть popup
@@ -64,8 +65,16 @@ const initialCards = [
     }
   ]; 
 
+//открываем окно добавления карточек
+function openPopupCard() {
+    popupCard.classList.add('popup_active');
+}
+buttonAdd.addEventListener('click', openPopupCard);
 
-
-
+//закрыть окно добавления карточек
+function closePopupCard() {
+    popupCard.classList.remove('popup_active');
+}
+buttonClose.addEventListener('click', closePopupCard);
 
 
