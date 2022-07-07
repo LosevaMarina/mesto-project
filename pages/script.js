@@ -8,7 +8,7 @@ let buttonClose = document.querySelector('.popup__close');
 let buttonRedact = document.querySelector('.profile__edit');
 
 let popups = document.querySelectorAll('.popup');
-let popupRedact = document.querySelectorAll('.popup_red');
+let popupRedact = document.querySelector('.popup_red');
 let popupCard = document.querySelector('.popup_card');
 
 //функция открыть popup
@@ -18,9 +18,12 @@ function openPopup(popup) {
 //вешаем событие на открытие popup
 //buttonRedact.addEventListener('click', openPopup(popupRedact));
 //buttonAdd.addEventListener('click', openPopup(popupCard));
-
 buttonRedact.addEventListener('click', evt => {
   openPopup(popupRedact);
+});
+
+buttonAdd.addEventListener('click', evt => {
+  openPopup(popupCard);
 });
 
 //функция закрыть popup
@@ -28,7 +31,11 @@ function closePopup(popup) {
   popup.classList.remove('popup_active');
 }
 
-buttonClose.addEventListener('click', closePopup(popups));
+buttonClose.addEventListener('click', evt => {
+  openPopup(popupCard);
+});
+
+//buttonClose.addEventListener('click', closePopup(popups));
 
 
 
