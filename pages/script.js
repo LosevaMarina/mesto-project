@@ -1,15 +1,41 @@
-let buttonRedact = document.querySelector('.profile__edit');
-let buttonClose = document.querySelector('.popup__close');
+//кнопка добавить  
 let buttonAdd = document.querySelector('.profile__add');
-let popup = document.querySelector('.popup');
-let popupCard = document.querySelector('.popup_card')
+//кнопка сохранить
 let buttonSave = document.querySelector('.popup__save');
+//кнопка закрыть 
+let buttonClose = document.querySelector('.popup__close');
+//кнопка редактировать
+let buttonRedact = document.querySelector('.profile__edit');
 
-//открыть popup
-function openPopup() {
-    popup.classList.add('popup_active');
+let popups = document.querySelectorAll('.popup');
+let popupRedact = document.querySelectorAll('.popup_red');
+let popupCard = document.querySelector('.popup_card');
+
+//функция открыть popup
+function openPopup(popup) {
+  popup.classList.add('popup_active');
 }
-buttonRedact.addEventListener('click', openPopup);
+//вешаем событие на открытие popup
+//buttonRedact.addEventListener('click', openPopup(popupRedact));
+//buttonAdd.addEventListener('click', openPopup(popupCard));
+
+buttonRedact.addEventListener('click', evt => {
+  openPopup(popupRedact);
+});
+
+//функция закрыть popup
+function closePopup(popup) {
+  popup.classList.remove('popup_active');
+}
+
+buttonClose.addEventListener('click', closePopup);
+
+
+
+
+
+
+
 
 //inputы, отправ формы
 const formElement = document.querySelector('.popup__fields');
@@ -28,13 +54,6 @@ function formSubmitHandler (evt) {
 formElement.addEventListener('submit', formSubmitHandler); 
 buttonSave.addEventListener('click', formSubmitHandler);
 buttonSave.addEventListener('click', closePopup);
-
-
-//закрыть popup
-function closePopup() {
-    popup.classList.remove('popup_active');
-}
-buttonClose.addEventListener('click', closePopup);
 
 
 //массив с рточми, добавляются при загруз страницы
@@ -64,17 +83,5 @@ const initialCards = [
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ]; 
-
-//открываем окно добавления карточек
-function openPopupCard() {
-    popupCard.classList.add('popup_active');
-}
-buttonAdd.addEventListener('click', openPopupCard);
-
-//закрыть окно добавления карточек
-function closePopupCard() {
-    popupCard.classList.remove('popup_active');
-}
-buttonClose.addEventListener('click', closePopupCard);
 
 
