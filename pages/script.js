@@ -108,12 +108,12 @@ for (let i = 0; i < initialCards.length; i++)
 
 //функция лайков
 function initLikes() {
-    let likeButtons = document.querySelectorAll(".element__like");
-    for (let i = 0; i < likeButtons.length; i++) {
-        likeButtons[i].onclick = function() {
-            this.classList.toggle("element__like_active");
-        };
-    }
+  let likeButtons = document.querySelectorAll(".element__like");
+  for(let i=0;i<likeButtons.length;i++) {
+      likeButtons[i].onclick = function() {
+          this.classList.toggle("element__like_active");
+      };
+  }
 }
 
 //добавление новой картинки
@@ -144,7 +144,7 @@ openPict.addEventListener('click', function(){
 });
 
 //удаление карточки
-function initLikes() {
+function deleteCards() {
   let deleteCard = document.querySelectorAll('.element__delete');
   for (let i = 0; i < deleteCard.length; i++) {
     deleteCard[i].onclick = function() {
@@ -153,10 +153,3 @@ function initLikes() {
     }
   }
 }
-
-
-
-
-
-
-
