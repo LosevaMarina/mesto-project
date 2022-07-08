@@ -124,6 +124,7 @@ function submitCardFormHandler(evt) {
     evt.preventDefault();
     cardsContainer.insertAdjacentElement("afterbegin", getCardElement(placeName.value, placeLink.value));
     initLikes();
+    initiCardsDeletion();
 }
 popupCardForm.addEventListener('submit', evt => {
     submitCardFormHandler(evt);
@@ -144,7 +145,7 @@ openPict.addEventListener('click', function(){
 });
 
 //удаление карточки
-function deleteCards() {
+function initiCardsDeletion() {
   let deleteCard = document.querySelectorAll('.element__delete');
   for (let i = 0; i < deleteCard.length; i++) {
     deleteCard[i].onclick = function() {
@@ -153,3 +154,4 @@ function deleteCards() {
     }
   }
 }
+initiCardsDeletion();
