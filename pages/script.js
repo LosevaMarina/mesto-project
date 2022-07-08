@@ -135,14 +135,18 @@ popupCardForm.addEventListener('submit', evt => {
 let popupImage = document.querySelector(".popup__figure-img");
 let popupImageName = document.querySelector(".popup__figure-desc");
 let popupPhotoFullSize = document.querySelector(".popup_photo");
-let openPict = document.querySelector(".element__photo");
-openPict.addEventListener('click', function(){
-  openPopup(popupPhotoFullSize);
-  popupImage.src = placeLink;
-  popupImage.alt = placeName;
-  popupImageName.textContent = placeName;
-  return
-});
+function initImageViewing() {
+  let pictures = document.querySelectorAll (".element__photo");
+  for (let i = 0; i < pictures.length; i++)
+  {pictures[i].onclick = (evt) => {
+    const thisPic = evt.target;
+    openPopup (popupPhotoFullSize);
+    popupImage.src = thisPic.getAttribute("src");
+    popupImage.alt = thisPic.getAttribute("alt");
+    popupImageName.textContent = thisPic.parentNode.querySelector("h2").textContent;
+  };}
+}
+initImageViewing();
 
 //удаление карточки
 function initiCardsDeletion() {
