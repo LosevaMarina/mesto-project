@@ -59,6 +59,8 @@ let profileProf = document.querySelector('.profile__proffesion');
 //модалки
 let popupRedact = document.querySelector('.popup_red');
 let popupCard = document.querySelector('.popup_card');
+let popupPhoto = document.querySelector('.popup_photo');
+
 //кнопка закрыть 
 let buttonClose = document.querySelectorAll('.popup__close');
 for (let i = 0; i < buttonClose.length; i++)
@@ -93,7 +95,8 @@ for (let i = 0; i < initialCards.length; i++)
             <img src="" alt="" class="element__photo">
             <div class="element__title-like">
                 <h2 class="element__title"></h2>
-                <button class="element__like" type="button" aria-label="поставить нравится"></button>
+                <button class="element__like" type="button" aria-label="поставить нравится">
+                </button>
             </div>`;
     cardEl.querySelector("img").setAttribute("src", link);
     cardEl.querySelector("img").setAttribute("alt", name);
@@ -104,7 +107,7 @@ for (let i = 0; i < initialCards.length; i++)
 //функция лайков
 function initLikes() {
     let likeButtons = document.querySelectorAll(".element__like");
-    for(let i=0;i<likeButtons.length;i++) {
+    for (let i = 0; i < likeButtons.length; i++) {
         likeButtons[i].onclick = function() {
             this.classList.toggle("element__like_active");
         };
@@ -119,6 +122,20 @@ function submitCardFormHandler(evt) {
     evt.preventDefault();
     cardsContainer.insertAdjacentElement("afterbegin", getCardElement(placeName.value, placeLink.value));
     initLikes();
+
+
+    let popupImage = document.querySelector(".popup__figure-img");
+    let popupImageName = document.querySelector(".popup__figure-desc");
+    let popupPhotoFullSize = document.querySelector(".popup_photo");
+    let openPict = document.querySelector(".element__photo");
+    openPict.addEventListener('click', function(){
+      openPopup(popupPhotoFullSize);
+      popupImage.src = placeLink;
+      popupImage.alt = placeName;
+      popupImageName.textContent = placeName;
+    });
+
+    
 }
 popupCardForm.addEventListener('submit', evt => {
     submitCardFormHandler(evt);
@@ -129,8 +146,16 @@ popupCardForm.addEventListener('submit', evt => {
 
 
 
+//let popupPhotoFullSize = document.querySelector(".popup_photo");
+//let openPict = document.querySelector(".element__photo");
+//openPict.addEventListener('click', function (evt) {
+  //popupPhotoFullSize.classList.add("openPopup");
+//});
+
+
 //buttonClose.addEventListener('click', evt => {
   //openPopup(popupCard);
+
 //});
 
 //buttonClose.addEventListener('click', closePopup(popups));
