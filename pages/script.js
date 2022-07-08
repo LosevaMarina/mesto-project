@@ -125,6 +125,7 @@ function submitCardFormHandler(evt) {
     cardsContainer.insertAdjacentElement("afterbegin", getCardElement(placeName.value, placeLink.value));
     initLikes();
     initiCardsDeletion();
+    initImageViewing();
 }
 popupCardForm.addEventListener('submit', evt => {
     submitCardFormHandler(evt);
