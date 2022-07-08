@@ -90,12 +90,52 @@ for(i = 0; i < initialCards.length; i++)
   
   initLinks();
 
+function getCardElement(name, like) {
+  let cardEl = document.createEvent("article");
+  cardEl.setAttribute("class", "element");
+  cardEl.innerHTML = `
+          <img src="" alt="" class="element__photo">
+          <div class="element__title-like">
+              <h2 class="element__title"></h2>
+              <button class="element__like" type="button" aria-label="поставить нравится">
+              </button>
+          </div>`
+  cardEl.querySelector("img").setAttribute("src", link);
+  cardEl.querySelector("img").setAttribute("alt", name);
+  cardEl.querySelector("h2").textContent = name;
+  return cardEl;
+}
 
 
+//модалка добавления
+const placeName = document.querySelector('#about_card');
+const placeLink = document.querySelector('#link');
+const popupCardForm = document.querySelector('popup_card form')
+function submitRedactFormHandler(evt) {
+  evt.preventDefault();
+  cardsContainer.insertAdjacentElement("afterbegin", getCardElement(placeName.value, placeLink.value));
+  initLikes();
+}
 
-buttonClose.addEventListener('click', evt => {
-  openPopup(popupCard);
+popupCardForm.addEventListener('submit', evt => {
+  submitRedactFormHandler(evt);
+  closePopup(popupCard);
 });
+//функция лайков
+function initLikes() {
+  let buttonsLike = document.querySelectorAll(".element__like");
+  for (let i = 0; i < buttonsLike.length; i++) {
+    buttonsLike[i].onclick = function() {
+      this.classList.toggle("element__like_active");
+    };
+  }
+}
+
+
+
+//buttonClose.addEventListener('click', evt => {
+  //openPopup(popupCard);
+//});
 
 //buttonClose.addEventListener('click', closePopup(popups));
 
