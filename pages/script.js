@@ -93,11 +93,13 @@ for (let i = 0; i < initialCards.length; i++)
     cardEl.setAttribute("class", "element");
     cardEl.innerHTML = `
             <img src="" alt="" class="element__photo">
+            <button class="element__delete" type="button"></button>
             <div class="element__title-like">
                 <h2 class="element__title"></h2>
                 <button class="element__like" type="button" aria-label="поставить нравится">
                 </button>
             </div>`;
+
     cardEl.querySelector("img").setAttribute("src", link);
     cardEl.querySelector("img").setAttribute("alt", name);
     cardEl.querySelector("h2").textContent = name;
@@ -122,43 +124,33 @@ function submitCardFormHandler(evt) {
     evt.preventDefault();
     cardsContainer.insertAdjacentElement("afterbegin", getCardElement(placeName.value, placeLink.value));
     initLikes();
-
-
-    let popupImage = document.querySelector(".popup__figure-img");
-    let popupImageName = document.querySelector(".popup__figure-desc");
-    let popupPhotoFullSize = document.querySelector(".popup_photo");
-    let openPict = document.querySelector(".element__photo");
-    openPict.addEventListener('click', function(){
-      openPopup(popupPhotoFullSize);
-      popupImage.src = placeLink;
-      popupImage.alt = placeName;
-      popupImageName.textContent = placeName;
-    });
-
-    
 }
 popupCardForm.addEventListener('submit', evt => {
     submitCardFormHandler(evt);
     closePopup(popupCard);
 });
 
+//открытие картинки для просмотра
+let popupImage = document.querySelector(".popup__figure-img");
+let popupImageName = document.querySelector(".popup__figure-desc");
+let popupPhotoFullSize = document.querySelector(".popup_photo");
+let openPict = document.querySelector(".element__photo");
+openPict.addEventListener('click', function(){
+  openPopup(popupPhotoFullSize);
+  popupImage.src = placeLink;
+  popupImage.alt = placeName;
+  popupImageName.textContent = placeName;
+  return
+});
 
 
+//удаление карточки
+const newCard = document.querySelector('.element').cloneNode(true);
+newCard.querySelector('.element__delete').addEventListener('click', function (evt) {
+  evt.target.closest('.element').remove();
+});
 
 
-//let popupPhotoFullSize = document.querySelector(".popup_photo");
-//let openPict = document.querySelector(".element__photo");
-//openPict.addEventListener('click', function (evt) {
-  //popupPhotoFullSize.classList.add("openPopup");
-//});
-
-
-//buttonClose.addEventListener('click', evt => {
-  //openPopup(popupCard);
-
-//});
-
-//buttonClose.addEventListener('click', closePopup(popups));
 
 
 
