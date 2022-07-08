@@ -143,13 +143,16 @@ openPict.addEventListener('click', function(){
   return
 });
 
-
 //удаление карточки
-const newCard = document.querySelector('.element').cloneNode(true);
-newCard.querySelector('.element__delete').addEventListener('click', function (evt) {
-  evt.target.closest('.element').remove();
-});
-
+function initLikes() {
+  let deleteCard = document.querySelectorAll('.element__delete');
+  for (let i = 0; i < deleteCard.length; i++) {
+    deleteCard[i].onclick = function() {
+      let revDiv = this.parentElement;
+      revDiv.remove();
+    }
+  }
+}
 
 
 
