@@ -26,19 +26,31 @@ const initialCards = [
     }
   ]; 
 
-let buttonAdd = document.querySelector('.profile__add');//кнопка добавить
+//кнопка редактировать
+let buttonRedact = document.querySelector('.profile__edit');
+buttonRedact.addEventListener('click', evt => { 
+    userName.value = profileName.textContent;
+    aboutMyself.value = profileProf.textContent;
+    openPopup(popupRedact);
+});
+
+//кнопка добавить
+let buttonAdd = document.querySelector('.profile__add');
 buttonAdd.addEventListener('click', evt => { 
     placeName.value ="";
     placeLink.value ="";
     openPopup(popupCard);
 });
 
-let buttonRedact = document.querySelector('.profile__edit');//кнопка редактировать
-buttonRedact.addEventListener('click', evt => { 
-    userName.value = profileName.textContent;
-    aboutMyself.value = profileProf.textContent;
-    openPopup(popupRedact);
-});
+//функция открыть popup
+function openPopup(popup) {
+  popup.classList.add('popup_active');
+}
+
+//функция закрыть popup
+function closePopup(popup) {
+  popup.classList.remove('popup_active');
+}
 
 //задаем переменные имя и профессия на странице
 let profileName = document.querySelector('.profile__name');
@@ -47,11 +59,12 @@ let profileProf = document.querySelector('.profile__proffesion');
 //модалки
 let popupRedact = document.querySelector('.popup_red');
 let popupCard = document.querySelector('.popup_card');
-let buttonClose = document.querySelectorAll('.popup__close');//кнопка закрыть 
+//кнопка закрыть 
+let buttonClose = document.querySelectorAll('.popup__close');
 for (let i = 0; i < buttonClose.length; i++)
   buttonClose[i].addEventListener('click', evt => {closePopup(evt.target.closest(".popup"));});
 
-//редактирование
+//редактирование формы 
 const userName = document.querySelector('#user_name');
 const aboutMyself = document.querySelector('#about_myself');
 const popupRedactForm = document.querySelector('.popup_red form');
@@ -65,16 +78,6 @@ popupRedactForm.addEventListener('submit', evt => {
     submitRedactFormHandler(evt);
     closePopup(popupRedact); 
 });
-
-//функция открыть popup
-function openPopup(popup) {
-  popup.classList.add('popup_active');
-}
-
-//функция закрыть popup
-function closePopup(popup) {
-  popup.classList.remove('popup_active');
-}
 
 //вставка изначальных карточек
 const cardsContainer = document.querySelector(".elements");
@@ -98,8 +101,17 @@ for (let i = 0; i < initialCards.length; i++)
     return cardEl;
 }
 
+//функция лайков
+function initLikes() {
+    let likeButtons = document.querySelectorAll(".element__like");
+    for(let i=0;i<likeButtons.length;i++) {
+        likeButtons[i].onclick = function() {
+            this.classList.toggle("element__like_active");
+        };
+    }
+}
 
-//модалка добавления
+//добавление новой картинки
 const placeName = document.querySelector('#about_card');
 const placeLink = document.querySelector('#link');
 const popupCardForm = document.querySelector(".popup_card form");
@@ -113,15 +125,7 @@ popupCardForm.addEventListener('submit', evt => {
     closePopup(popupCard);
 });
 
-//функция лайков
-function initLikes() {
-    let likeButtons = document.querySelectorAll(".element__like");
-    for(let i=0;i<likeButtons.length;i++) {
-        likeButtons[i].onclick = function() {
-            this.classList.toggle("element__like_active");
-        };
-    }
-}
+
 
 
 
