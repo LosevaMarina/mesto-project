@@ -27,7 +27,7 @@ const initialCards = [
   ]; 
 
 //кнопка редактировать
-let buttonRedact = document.querySelector('.profile__edit');
+const buttonRedact = document.querySelector('.profile__edit');
 buttonRedact.addEventListener('click', evt => { 
     userName.value = profileName.textContent;
     aboutMyself.value = profileProf.textContent;
@@ -35,10 +35,16 @@ buttonRedact.addEventListener('click', evt => {
 });
 
 //кнопка добавить
-let buttonAdd = document.querySelector('.profile__add');
+const buttonAdd = document.querySelector('.profile__add');
 buttonAdd.addEventListener('click', evt => { 
-    placeName.value ="";
-    placeLink.value ="";
+    //placeName.value ="";
+    //placeLink.value ="";
+    document.addEventListener('submit', (placeName) => { 
+      placeName.target.reset(); 
+    });
+    document.addEventListener('submit', (placeLink) => { 
+      placeLink.target.reset(); 
+    });
     openPopup(popupCard);
 });
 
@@ -53,110 +59,91 @@ function closePopup(popup) {
 }
 
 //задаем переменные имя и профессия на странице
-let profileName = document.querySelector('.profile__name');
-let profileProf = document.querySelector('.profile__proffesion');
+const profileName = document.querySelector('.profile__name');
+const profileProf = document.querySelector('.profile__proffesion');
 
 //модалки
-let popupRedact = document.querySelector('.popup_red');
-let popupCard = document.querySelector('.popup_card');
-let popupPhoto = document.querySelector('.popup_photo');
+const popupRedact = document.querySelector('.popup_red');
+const popupCard = document.querySelector('.popup_card');
+const popupPhoto = document.querySelector('.popup_photo');
+const popupImage = document.querySelector(".popup__figure-img");
+const popupImageName = document.querySelector(".popup__figure-desc");
+const popupPhotoFullSize = document.querySelector(".popup_photo");
 
 //кнопка закрыть 
-let buttonClose = document.querySelectorAll('.popup__close');
-for (let i = 0; i < buttonClose.length; i++)
-  buttonClose[i].addEventListener('click', evt => {closePopup(evt.target.closest(".popup"));});
+const closeButtonList= document.querySelectorAll('.popup__close');
+for (let i = 0; i < closeButtonList.length; i++)
+closeButtonList[i].addEventListener('click', evt => { closePopup(evt.target.closest(".popup")); });
 
 //редактирование формы 
 const userName = document.querySelector('#user_name');
 const aboutMyself = document.querySelector('#about_myself');
 const popupRedactForm = document.querySelector('.popup_red form');
 function submitRedactFormHandler(evt) {
-    evt.preventDefault();
-    profileName.textContent = userName.value;
-    profileProf.textContent = aboutMyself.value;
-    console.log(profileName);
+  evt.preventDefault();
+  profileName.textContent = userName.value;
+  profileProf.textContent = aboutMyself.value;
+  console.log(profileName);
 }
 popupRedactForm.addEventListener('submit', evt => {
-    submitRedactFormHandler(evt);
-    closePopup(popupRedact); 
+  submitRedactFormHandler(evt);
+  closePopup(popupRedact);
 });
 
 //вставка изначальных карточек
 const cardsContainer = document.querySelector(".elements");
 for (let i = 0; i < initialCards.length; i++)
-    cardsContainer.appendChild(getCardElement(initialCards[i].name, initialCards[i].link));
-
-    initLikes();
-
-  function getCardElement(name, link) {
-    let cardEl = document.createElement("article");
-    cardEl.setAttribute("class", "element");
-    cardEl.innerHTML = `
-            <img src="" alt="" class="element__photo">
-            <button class="element__delete" type="button"></button>
-            <div class="element__title-like">
-                <h2 class="element__title"></h2>
-                <button class="element__like" type="button" aria-label="поставить нравится">
-                </button>
-            </div>`;
-
-    cardEl.querySelector("img").setAttribute("src", link);
-    cardEl.querySelector("img").setAttribute("alt", name);
-    cardEl.querySelector("h2").textContent = name;
-    return cardEl;
-}
-
-//функция лайков
-function initLikes() {
-  let likeButtons = document.querySelectorAll(".element__like");
-  for(let i=0;i<likeButtons.length;i++) {
-      likeButtons[i].onclick = function() {
-          this.classList.toggle("element__like_active");
-      };
-  }
-}
+  cardsContainer.append(createCardElement(initialCards[i].name, initialCards[i].link));
 
 //добавление новой картинки
 const placeName = document.querySelector('#about_card');
 const placeLink = document.querySelector('#link');
 const popupCardForm = document.querySelector(".popup_card form");
 function submitCardFormHandler(evt) {
-    evt.preventDefault();
-    cardsContainer.insertAdjacentElement("afterbegin", getCardElement(placeName.value, placeLink.value));
-    initLikes();
-    initiCardsDeletion();
-    initImageViewing();
+  evt.preventDefault();
+  cardsContainer.prepend(createCardElement(placeName.value, placeLink.value));
+ 
 }
 popupCardForm.addEventListener('submit', evt => {
-    submitCardFormHandler(evt);
-    closePopup(popupCard);
+  submitCardFormHandler(evt);
+  closePopup(popupCard);
 });
 
-//открытие картинки для просмотра
-let popupImage = document.querySelector(".popup__figure-img");
-let popupImageName = document.querySelector(".popup__figure-desc");
-let popupPhotoFullSize = document.querySelector(".popup_photo");
-function initImageViewing() {
-  let pictures = document.querySelectorAll (".element__photo");
-  for (let i = 0; i < pictures.length; i++)
-  {pictures[i].onclick = (evt) => {
-    const thisPic = evt.target;
-    openPopup (popupPhotoFullSize);
-    popupImage.src = thisPic.getAttribute("src");
-    popupImage.alt = thisPic.getAttribute("alt");
-    popupImageName.textContent = thisPic.parentNode.querySelector("h2").textContent;
-  };}
-}
-initImageViewing();
+function createCardElement(name, link) {
+  let cardEl = document.createElement("article");
+  cardEl.setAttribute("class", "element");
+  cardEl.innerHTML = `
+      <img src="" alt="" class="element__photo">
+      <button class="element__delete" type="button"></button>
+      <div class="element__title-like">
+          <h2 class="element__title"></h2>
+          <button class="element__like" type="button" aria-label="поставить нравится">
+          </button>
+      </div>`;
 
-//удаление карточки
-function initiCardsDeletion() {
-  let deleteCard = document.querySelectorAll('.element__delete');
-  for (let i = 0; i < deleteCard.length; i++) {
-    deleteCard[i].onclick = function() {
-      let revDiv = this.parentElement;
-      revDiv.remove();
-    }
+  cardEl.querySelector("img").setAttribute("src", link);
+  cardEl.querySelector("img").setAttribute("alt", name);
+  cardEl.querySelector("h2").textContent = name;
+
+  //Лайк
+  cardEl.querySelector(".element__like").onclick = (evt) => {
+    evt.target.classList.toggle("element__like_active");
   }
+
+  //Просмотр картинки
+  cardEl.querySelector(".element__photo").onclick = (evt) => {
+    const pic = evt.target;
+    openPopup(popupPhotoFullSize);
+    popupImage.src = pic.getAttribute("src");
+    popupImage.alt = pic.getAttribute("alt");
+    popupImageName.textContent = pic.parentNode.querySelector("h2").textContent;
+  }
+
+  //Удаление
+  cardEl.querySelector('.element__delete').onclick = (evt) => {
+    const revDiv = evt.target.closest(".element");
+      revDiv.remove();
+  }
+
+  return cardEl;
 }
-initiCardsDeletion();
