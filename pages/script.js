@@ -78,7 +78,6 @@ function submitRedactFormHandler(evt) {
   evt.preventDefault();
   profileName.textContent = userName.value;
   profileProf.textContent = aboutMyself.value;
-  console.log(profileName);
 }
 popupRedactForm.addEventListener('submit', evt => {
   submitRedactFormHandler(evt);
@@ -105,20 +104,29 @@ popupCardForm.addEventListener('submit', evt => {
 });
 
 function createCardElement(name, link) {
-  let cardEl = document.createElement("article");
-  cardEl.setAttribute("class", "element");
-  cardEl.innerHTML = `
-      <img src="" alt="" class="element__photo">
-      <button class="element__delete" type="button"></button>
-      <div class="element__title-like">
-          <h2 class="element__title"></h2>
-          <button class="element__like" type="button" aria-label="поставить нравится">
-          </button>
-      </div>`;
 
-  cardEl.querySelector("img").setAttribute("src", link);
-  cardEl.querySelector("img").setAttribute("alt", name);
-  cardEl.querySelector("h2").textContent = name;
+  const CardElement = document.querySelector('.cards-template').content;
+  const cardEl = CardElement.querySelector('.element').cloneNode(true);
+
+  cardEl.querySelector('.element__title').textContent = name;
+  cardEl.querySelector('.element__photo').alt = name;
+  cardEl.querySelector('.element__photo').src = link;
+  cardsContainer.append(cardEl);
+
+  //let cardEl = document.createElement("article");
+  //cardEl.setAttribute("class", "element");
+  //cardEl.innerHTML = `
+  //    <img src="" alt="" class="element__photo">
+  //    <button class="element__delete" type="button"></button>
+  //    <div class="element__title-like">
+  //        <h2 class="element__title"></h2>
+  //        <button class="element__like" type="button" aria-label="поставить нравится">
+  //        </button>
+  //    </div>`;
+  //cardEl.querySelector("img").setAttribute("src", link);
+  //cardEl.querySelector("img").setAttribute("alt", name);
+  //cardEl.querySelector("h2").textContent = name;
+
 
   //Лайк
   cardEl.querySelector(".element__like").onclick = (evt) => {
