@@ -3,3 +3,7 @@
     max-width: 100%;    
     object-fit: cover;
 }
+
+.element__photo:hover {
+    cursor: pointer;
+}

@@ -39,12 +39,7 @@ const buttonAdd = document.querySelector('.profile__add');
 buttonAdd.addEventListener('click', evt => { 
     //placeName.value ="";
     //placeLink.value ="";
-    document.addEventListener('submit', (placeName) => { 
-      placeName.target.reset(); 
-    });
-    document.addEventListener('submit', (placeLink) => { 
-      placeLink.target.reset(); 
-    });
+    document.querySelector('#add_card_form').reset();
     openPopup(popupCard);
 });
 
@@ -102,8 +97,8 @@ const popupCardForm = document.querySelector(".popup_card form");
 function submitCardFormHandler(evt) {
   evt.preventDefault();
   cardsContainer.prepend(createCardElement(placeName.value, placeLink.value));
- 
 }
+
 popupCardForm.addEventListener('submit', evt => {
   submitCardFormHandler(evt);
   closePopup(popupCard);
