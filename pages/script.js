@@ -51,10 +51,6 @@ const placeName = document.querySelector('#about_card');
 const placeLink = document.querySelector('#link');
 const popupCardForm = document.querySelector(".popup_card form");
 
-
-
-
-
 //кнопка редактировать
 const buttonRedact = document.querySelector('.profile__edit');
 buttonRedact.addEventListener('click', evt => { 
@@ -117,29 +113,30 @@ popupCardForm.addEventListener('submit', evt => {
 
 function createCardElement(name, link) {
   const cardEl = cardElement.querySelector('.element').cloneNode(true);
+  const elPhoto = cardEl.querySelector('.element__photo');
   cardEl.querySelector('.element__title').textContent = name;
-  cardEl.querySelector('.element__photo').alt = name;
-  cardEl.querySelector('.element__photo').src = link;
+  elPhoto.alt = name;
+  elPhoto.src = link;
 
   //Лайк
-  cardEl.querySelector(".element__like").onclick = (evt) => {
+  cardEl.querySelector(".element__like").addEventListener("click", (evt) => {
     evt.target.classList.toggle("element__like_active");
-  }
+  })
 
   //Просмотр картинки
-  cardEl.querySelector(".element__photo").onclick = (evt) => {
+  elPhoto.addEventListener("click", (evt) => {
     const pic = evt.target;
     openPopup(popupPhotoFullSize);
     popupImage.src = pic.getAttribute("src");
     popupImage.alt = pic.getAttribute("alt");
-    popupImageName.textContent = pic.parentNode.querySelector("h2").textContent;
-  }
+    popupImageName.textContent = pic.alt;
+  })
 
   //Удаление
-  cardEl.querySelector('.element__delete').onclick = (evt) => {
+  cardEl.querySelector('.element__delete').addEventListener("click", (evt) => {
     const revDiv = evt.target.closest(".element");
       revDiv.remove();
-  }
+  })
 
   return cardEl;
 }
