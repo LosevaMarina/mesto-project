@@ -120,6 +120,7 @@ function createCardElement(name, link) {
 
   //Лайк
   cardEl.querySelector(".element__like").addEventListener("click", (evt) => {
+    //if (evt.target.classList.contains('element__like')) {
     evt.target.classList.toggle("element__like_active");
   })
 
@@ -140,3 +141,15 @@ function createCardElement(name, link) {
 
   return cardEl;
 }
+
+
+
+
+const closeEsc= document.querySelectorAll('.popup');
+for (let i = 0; i < closeEsc.length; i++)
+closeEsc[i].addEventListener('keydown', evt => { 
+  if (evt.key === "Escape") {
+    evt.preventDefault();
+    closePopup(evt.target.closest(".popup"));
+    console.log ("закрываем попап при нажатии на Enter!")}
+   });
