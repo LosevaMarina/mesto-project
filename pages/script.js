@@ -142,14 +142,31 @@ function createCardElement(name, link) {
   return cardEl;
 }
 
-
-
-
-const closeEsc= document.querySelectorAll('.popup');
-for (let i = 0; i < closeEsc.length; i++)
-closeEsc[i].addEventListener('keydown', evt => { 
+//закрытие попапа при нажатии на Esc
+function CloseEscape (evt) {
   if (evt.key === "Escape") {
-    evt.preventDefault();
-    closePopup(evt.target.closest(".popup"));
-    console.log ("закрываем попап при нажатии на Enter!")}
-   });
+    const PopList = document.querySelectorAll (".popup");
+    for (let i = 0; i < PopList.length; i++) {
+      if (PopList[i].classList.contains('popup_active')) {
+        //evt.preventDefault();
+        closePopup(PopList[i]);
+        console.log ("закрываем попап при нажатии на Esc!")
+      }
+      }
+  }
+}
+document.addEventListener ('keydown', CloseEscape);
+
+
+//Закрываем попап при нажатии на клавишу мыши
+document.querySelector('.popup__bg').addEventListener('click', () => {
+  console.log('закрываем попап');
+  const PopList2 = document.querySelectorAll (".popup");
+    for (let i = 0; i < PopList2.length; i++) {
+      if (PopList2[i].classList.contains('popup_active')) {
+        //evt.preventDefault();
+        closePopup(PopList2[i]);
+        console.log ("закрываем попап при нажатии на Esc!")
+      }
+      }
+});
