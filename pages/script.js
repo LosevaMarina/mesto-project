@@ -43,20 +43,28 @@ const popupLike = document.querySelector('.element__like');
 const cardElement = document.querySelector('.cards-template').content;
 
 //редактирование формы 
-const userName = document.querySelector('#user_name');
-const aboutMyself = document.querySelector('#about_myself');
+//const userName = document.querySelector('#user_name');
+//const aboutMyself = document.querySelector('#about_myself');
 const popupRedactForm = document.querySelector('.popup_red form');
+const Form1 = document.forms.edit_profile; //получили форму 
+const Name = Form1.elements.name;//получили элемент формы имя
+const About = Form1.elements.about
+
 //добавление новой картинки
 const placeName = document.querySelector('#about_card');
 const placeLink = document.querySelector('#link');
 const popupCardForm = document.querySelector(".popup_card form");
 
+
 //кнопка редактировать
 const buttonRedact = document.querySelector('.profile__edit');
 buttonRedact.addEventListener('click', evt => { 
-    userName.value = profileName.textContent;
-    aboutMyself.value = profileProf.textContent;
+  Name.value = profileName.textContent;
+  About.value = profileProf.textContent;
+    //userName.value = profileName.textContent;
+    //aboutMyself.value = profileProf.textContent;
     openPopup(popupRedact);
+    setSubmitButtonState(true);
 });
 
 //кнопка добавить
@@ -87,8 +95,10 @@ closeButtonList[i].addEventListener('click', evt => { closePopup(evt.target.clos
 //функция редактирование формы 
 function submitRedactFormHandler(evt) {
   evt.preventDefault();
-  profileName.textContent = userName.value;
-  profileProf.textContent = aboutMyself.value;
+  profileName.textContent = Name.value;
+  profileProf.textContent = About.value;
+  //profileName.textContent = userName.value;
+  //profileProf.textContent = aboutMyself.value;
 }
 
 //вставка изначальных карточек
@@ -176,3 +186,35 @@ function CloseEscape (evt) {
       }
     }
 
+
+    //вешаем слушатель input, который срабатывает при вводе или удалении каждого символа
+    //проверяем что в каждом инпуте символов больше 0 и вызываем функцию setSubmitButtonState с передачей isValid, значение которого true или false
+    Form1.addEventListener('input', function (evt) {
+      const isValid = Name.value.length > 0 && About.value.length > 0;
+      setSubmitButtonState (isValid);
+    });
+
+    function setSubmitButtonState(isFormValid) {
+      const PopupSave = document.querySelector('.popup__save');
+      if (isFormValid) {
+        PopupSave.removeAttribute('disabled');
+        PopupSave.classList.remove('popup__save_disabled'); 
+      }
+      else {
+        PopupSave.setAttribute('disabled', true);
+        PopupSave.classList.add('popup__save_disabled'); 
+      }
+    }
+
+
+//ПРИМЕР РАБОТЫ С ФОРМАМИ
+//const Form1 = document.forms.edit_profile; //получили форму 
+//const Name = Form1.elements.name;//получили элемент формы имя
+//const About = Form1.elements.about
+// вешаем на неё обработчик события submit
+Form1.addEventListener ('submit', function(evt) {
+   // отменим стандартное поведение
+   evt.preventDefault();
+   console.log(Name); //выводим элемент формы
+   //проверяем данные формы 
+})

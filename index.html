@@ -38,7 +38,7 @@
   <div class="popup popup_red">
     <div class="popup__container">
       <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="edit_profile" method="post">
+      <form class="popup__form" name="edit_profile" method="post"> <!-- action="адрес сервера, куда отправить форму"-->
         <fieldset class="popup__fields">
           <input type="text" name="name" placeholder="Имя" class="popup__user" id="user_name">
           <input type="text" name="about" placeholder="О себе" class="popup__user" id="about_myself">
@@ -54,7 +54,7 @@
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="add_card" method="post" id="add_card_form">
         <fieldset class="popup__fields">
-          <input type="text" name="name" placeholder="Название" class="popup__user" id="about_card">
+          <input type="text" name="name-page" placeholder="Название" class="popup__user" id="about_card">
           <input type="text" name="link" placeholder="Ссылка на картинку" class="popup__user" id="link">
         </fieldset>      
         <button class="popup__save" type="submit" aria-label="Кнопка создать">Создать</button>
