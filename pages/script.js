@@ -45,7 +45,7 @@ const cardElement = document.querySelector('.cards-template').content;
 //редактирование формы 
 //const userName = document.querySelector('#user_name');
 //const aboutMyself = document.querySelector('#about_myself');
-const popupRedactForm = document.querySelector('.popup_red form');
+//const popupRedactForm = document.querySelector('.popup_red form');
 const FormEditProfile = document.forms.edit_profile; //получили форму 
 const Name = FormEditProfile.elements.name;//получили элемент формы имя
 const About = FormEditProfile.elements.about
@@ -53,7 +53,7 @@ const About = FormEditProfile.elements.about
 //добавление новой картинки
 //const placeName = document.querySelector('#about_card');
 //const placeLink = document.querySelector('#link');
-const popupCardForm = document.querySelector(".popup_card form");
+//const popupCardForm = document.querySelector(".popup_card form");
 const FormAddCard = document.forms.add_card; //получили форму 
 const NamePage = FormAddCard.elements.namepage;//получили элемент формы имя
 const LinkPage = FormAddCard.elements.link
@@ -67,14 +67,17 @@ buttonRedact.addEventListener('click', evt => {
     //userName.value = profileName.textContent;
     //aboutMyself.value = profileProf.textContent;
     openPopup(popupRedact);
+    //setSubmitButtonState(true);
+    isValid(true);
 });
 
 //кнопка добавить
 const buttonAdd = document.querySelector('.profile__add');
 buttonAdd.addEventListener('click', evt => { 
-    popupCardForm.reset();
+    FormAddCard.reset();
     openPopup(popupCard);
-    setSubmitButtonState(false);
+    //setSubmitButtonState(false);
+    isValid(false);
 });
 
 //функция открыть popup
@@ -116,14 +119,18 @@ function submitCardFormHandler(evt) {
 }
 
 //слушатели кнопок
-popupRedactForm.addEventListener('submit', evt => {
+FormEditProfile.addEventListener('submit', evt => {
   submitRedactFormHandler(evt);
   closePopup(popupRedact);
+  // Отменим стандартное поведение по сабмиту
+  evt.preventDefault();
 });
 
-popupCardForm.addEventListener('submit', evt => {
+FormAddCard.addEventListener('submit', evt => {
   submitCardFormHandler(evt);
   closePopup(popupCard);
+  // Отменим стандартное поведение по сабмиту
+  evt.preventDefault();
 });
 
 
@@ -159,16 +166,16 @@ function createCardElement(name, link) {
 }
 
 //закрытие попапа при нажатии на Esc
-//function CloseEscape (evt) {
- // if (evt.key === "Escape") {
- //   const PopList = document.querySelectorAll (".popup");
- //   for (let i = 0; i < PopList.length; i++) {
- //     if (PopList[i].classList.contains('popup_active')) {
- //       closePopup(PopList[i]);
- //     }
- //     }
- // }
-//}
+function CloseEscape (evt) {
+  if (evt.key === "Escape") {
+    const PopList = document.querySelectorAll (".popup");
+    for (let i = 0; i < PopList.length; i++) {
+      if (PopList[i].classList.contains('popup_active')) {
+        closePopup(PopList[i]);
+      }
+      }
+  }
+}
 
 //закрытие попапа при нажатии на мышь
 function CloseMouse (evt) { 
@@ -181,29 +188,73 @@ function CloseMouse (evt) {
 }
 
 //закрытие попапа при нажатии на Esc
-function CloseEscape (evt) {
-  const PopupActive = document.querySelector (".popup_active");
-  if (evt.key === "Escape") {
-        closePopup(PopupActive);
-      }
-    }
+//function CloseEscape (evt) {
+  //const PopupActive = document.querySelector (".popup_active");
+  //if (evt.key === "Escape") {
+      //  closePopup(PopupActive);
+     // }
+  //  }
 
 
     //вешаем слушатель input, который срабатывает при вводе или удалении каждого символа
     //проверяем что в каждом инпуте символов больше 0 и вызываем функцию setSubmitButtonState с передачей isValid, значение которого true или false
-    FormAddCard.addEventListener('input', function (evt) {
-      const isValid = NamePage.value.length > 0 && LinkPage.value.length > 0;
-      setSubmitButtonState (isValid);
-    });
+    //FormAddCard.addEventListener('input', function (evt) {
+    //  const isValid = NamePage.value.length > 0 && LinkPage.value.length > 0;
+    //  setSubmitButtonState (isValid);
+    //})
 
-    function setSubmitButtonState(isFormValid) {
-      const PopupSave = document.querySelector('.popup__save_card');
-      if (isFormValid) {
-        PopupSave.removeAttribute('disabled');
-        PopupSave.classList.remove('popup__save_disabled'); 
-      }
-      else {
-        PopupSave.setAttribute('disabled', true);
-        PopupSave.classList.add('popup__save_disabled'); 
-      }
-    }
+    //FormEditProfile.addEventListener('input', function (evt) {
+    //  const isValid = Name.value.length > 0 && About.value.length > 0;
+    //  setSubmitButtonState (isValid);
+    //});
+
+    //function setSubmitButtonState(isFormValid) {
+    //  const PopupSave = document.querySelector('.popup__save_card');
+    //  if (isFormValid) {
+    //    PopupSave.removeAttribute('disabled');
+    //    PopupSave.classList.remove('popup__save_disabled'); 
+    //  }
+    //  else {
+    //    PopupSave.setAttribute('disabled', true);
+    //    PopupSave.classList.add('popup__save_disabled'); 
+    //  }
+    //}
+
+
+    
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (element) => {
+  element.classList.add('popup__user_disabled');
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (element) => {
+  element.classList.remove('popup__user_disabled');
+};
+
+// Функция, которая проверяет валидность поля всех инпутов
+const isValid = () => {
+  PopupInput = document.querySelectorAll ('.popup__user');
+  for (let i = 0; i < PopupInput.length; i++) {
+  //const = ошибка, ищем по id инпута
+  const formError = document.querySelector(`.${PopupInput[i].id}-error`); 
+  console.log ("сюда смотри!!! ебанарот" + `.${PopupInput[i].id}-error`);
+  if (!PopupInput[i].validity.valid) {
+    // Если поле не проходит валидацию, покажем ошибку
+    showInputError(PopupInput[i]);
+    //покажем сообщение об ошибке
+    formError.classList.add('popup__user-error_active');
+  } else {
+    // Если проходит, скроем
+    hideInputError(PopupInput[i]);
+    //скроем сообщение об ошибке
+    formError.classList.remove('popup__user-error_active');
+  }
+}
+};
+
+// Вызовем функцию isValid на каждый ввод символа
+Name.addEventListener('input', isValid); 
+About.addEventListener('input', isValid); 
+NamePage.addEventListener('input', isValid); 
+LinkPage.addEventListener('input', isValid); 
