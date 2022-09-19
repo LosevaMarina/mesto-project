@@ -46,14 +46,17 @@ const cardElement = document.querySelector('.cards-template').content;
 //const userName = document.querySelector('#user_name');
 //const aboutMyself = document.querySelector('#about_myself');
 const popupRedactForm = document.querySelector('.popup_red form');
-const Form1 = document.forms.edit_profile; //получили форму 
-const Name = Form1.elements.name;//получили элемент формы имя
-const About = Form1.elements.about
+const FormEditProfile = document.forms.edit_profile; //получили форму 
+const Name = FormEditProfile.elements.name;//получили элемент формы имя
+const About = FormEditProfile.elements.about
 
 //добавление новой картинки
-const placeName = document.querySelector('#about_card');
-const placeLink = document.querySelector('#link');
+//const placeName = document.querySelector('#about_card');
+//const placeLink = document.querySelector('#link');
 const popupCardForm = document.querySelector(".popup_card form");
+const FormAddCard = document.forms.add_card; //получили форму 
+const NamePage = FormAddCard.elements.namepage;//получили элемент формы имя
+const LinkPage = FormAddCard.elements.link
 
 
 //кнопка редактировать
@@ -64,7 +67,6 @@ buttonRedact.addEventListener('click', evt => {
     //userName.value = profileName.textContent;
     //aboutMyself.value = profileProf.textContent;
     openPopup(popupRedact);
-    setSubmitButtonState(true);
 });
 
 //кнопка добавить
@@ -72,6 +74,7 @@ const buttonAdd = document.querySelector('.profile__add');
 buttonAdd.addEventListener('click', evt => { 
     popupCardForm.reset();
     openPopup(popupCard);
+    setSubmitButtonState(false);
 });
 
 //функция открыть popup
@@ -109,7 +112,7 @@ for (let i = 0; i < initialCards.length; i++)
 //функция добавления новой картинки
 function submitCardFormHandler(evt) {
   evt.preventDefault();
-  cardsContainer.prepend(createCardElement(placeName.value, placeLink.value));
+  cardsContainer.prepend(createCardElement(NamePage.value, LinkPage.value));
 }
 
 //слушатели кнопок
@@ -177,7 +180,6 @@ function CloseMouse (evt) {
   }  
 }
 
-
 //закрытие попапа при нажатии на Esc
 function CloseEscape (evt) {
   const PopupActive = document.querySelector (".popup_active");
@@ -189,13 +191,13 @@ function CloseEscape (evt) {
 
     //вешаем слушатель input, который срабатывает при вводе или удалении каждого символа
     //проверяем что в каждом инпуте символов больше 0 и вызываем функцию setSubmitButtonState с передачей isValid, значение которого true или false
-    Form1.addEventListener('input', function (evt) {
-      const isValid = Name.value.length > 0 && About.value.length > 0;
+    FormAddCard.addEventListener('input', function (evt) {
+      const isValid = NamePage.value.length > 0 && LinkPage.value.length > 0;
       setSubmitButtonState (isValid);
     });
 
     function setSubmitButtonState(isFormValid) {
-      const PopupSave = document.querySelector('.popup__save');
+      const PopupSave = document.querySelector('.popup__save_card');
       if (isFormValid) {
         PopupSave.removeAttribute('disabled');
         PopupSave.classList.remove('popup__save_disabled'); 
@@ -205,16 +207,3 @@ function CloseEscape (evt) {
         PopupSave.classList.add('popup__save_disabled'); 
       }
     }
-
-
-//ПРИМЕР РАБОТЫ С ФОРМАМИ
-//const Form1 = document.forms.edit_profile; //получили форму 
-//const Name = Form1.elements.name;//получили элемент формы имя
-//const About = Form1.elements.about
-// вешаем на неё обработчик события submit
-Form1.addEventListener ('submit', function(evt) {
-   // отменим стандартное поведение
-   evt.preventDefault();
-   console.log(Name); //выводим элемент формы
-   //проверяем данные формы 
-})

@@ -8,5 +8,5 @@
 
 .popup__save_disabled:hover {
     opacity: 0.2;
-    cursor: pointer;
+    cursor: default;
 }
