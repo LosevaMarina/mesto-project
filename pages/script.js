@@ -81,9 +81,9 @@ buttonAdd.addEventListener('click', evt => {
 //функция открыть popup
 function openPopup(popup) {
   popup.classList.add('popup_active');
-//слушатели нажатия Esc и Overlay
+//слушатели нажатия на Esc и мышь
   document.addEventListener ('keydown', CloseEscape);
-  //document.addEventListener ('click', CloseMouse);
+  document.addEventListener ('click', CloseMouse);
 };
 
 //функция закрыть popup
@@ -175,15 +175,15 @@ function CloseEscape (evt) {
 }
 
 //закрытие попапа при нажатии на мышь 
-//function CloseMouse (evt) {  
-  //const popup = document.querySelector('.popup_active'); 
-  //const composedPath = evt.composedPath();
-  //const clickedOutside = composedPath.includes(popup); 
-  //if (clickedOutside) { 
-  //  closePopup(popup); 
-  //  console.log('не трогай мышь!')
-  //} 
-//}
+function CloseMouse (evt) {  
+  const popup = document.querySelector('.popup_active'); 
+  const composedPath = evt.composedPath();
+  const clickedOutside = composedPath.includes(popup) && !composedPath.includes(popup.querySelector(".popup__container")); 
+  if (clickedOutside) { 
+    closePopup(popup); 
+    console.log('не трогай мышь!')
+  } 
+}
 
 //закрытие попапа при нажатии на мышь
 //function CloseMouse (evt) { 
