@@ -1,5 +1,5 @@
 .popup__user-error {
-    display: block;
+    display: none;
     margin: 0;
     font-family: 'Inter';
     font-style: normal;
