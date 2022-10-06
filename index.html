@@ -40,9 +40,17 @@
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="edit_profile" method="post" novalidate> <!-- action="адрес сервера, куда отправить форму"-->
         <fieldset class="popup__fields">
-          <input type="text" name="name" placeholder="Имя" class="popup__user" id="user_name" required minlength="5">
+          <input type="text" name="name" placeholder="Имя" class="popup__user" id="user_name" 
+          required 
+          minlength="5"
+          maxlength="40"
+          pattern="^[а-яА-Яa-zA-Z-_]+$"
+          data-error-message="Можно использовать только буквы">
           <span class="popup__user-error user_name-error">Необходимо заполнить данное поле</span>
-          <input type="text" name="about" placeholder="О себе" class="popup__user" id="about_myself" required minlength="5">
+          <input type="text" name="about" placeholder="О себе" class="popup__user" id="about_myself" 
+          required 
+          minlength="5"
+          maxlength="40">
           <span class="popup__user-error about_myself-error">Необходимо заполнить данное поле</span>
         </fieldset>      
         <button class="popup__save" type="submit" aria-label="Кнопка сохранить">Сохранить</button>
@@ -56,12 +64,17 @@
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="add_card" method="post" id="add_card_form" novalidate>
         <fieldset class="popup__fields">
-          <input type="text" name="namepage" placeholder="Название" class="popup__user" id="about_card" required minlength="5">
+          <input type="text" name="namepage" placeholder="Название" class="popup__user" id="about_card" 
+          required 
+          minlength="5"
+          maxlength="40">
           <span class="popup__user-error about_card-error">Необходимо заполнить данное поле</span>
-          <input type="text" name="link" placeholder="Ссылка на картинку" class="popup__user" id="link" required minlength="5">
+          <input type="url" name="link" placeholder="Ссылка на картинку" class="popup__user" id="link" 
+          required 
+          minlength="5">
           <span class="popup__user-error link-error">Необходимо заполнить данное поле</span>
         </fieldset>      
-        <button class="popup__save popup__save_card" type="submit" aria-label="Кнопка создать">Создать</button>
+        <button class="popup__save" type="submit" aria-label="Кнопка создать">Создать</button>
       </form>
     <button class="popup__close" type="button" aria-label="Кнопка закрыть форму"></button>
     </div>
