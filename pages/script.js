@@ -271,9 +271,11 @@ const hasInvalidInput = (inputList) => {
 //стилизация кнопки (активна-нет)
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add ('popup__save_disabled');
+    console.log ('да');
+    buttonElement.classList.add('popup__save_disabled');
   } else {
-    buttonElement.classList.remove ('popup__save_disabled');
+    console.log ('нет');
+    buttonElement.classList.remove('popup__save_disabled');
   }
 };
 enableValidation();
