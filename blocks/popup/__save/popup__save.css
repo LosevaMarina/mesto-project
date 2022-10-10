@@ -15,12 +15,7 @@
     align-items: center;
     justify-content: center;
     border: none;
-}
-
-.popup__save:hover {
-    transition: 0.5s ease;
-    opacity: 0.8;
-    cursor: pointer;
+    transition: opacity 0.3s linear;
 }
 
 @media (max-width: 600px)

@@ -42,18 +42,20 @@
         <fieldset class="popup__fields">
           <input type="text" name="name" placeholder="Имя" class="popup__user" id="user_name" 
           required 
-          minlength="5"
+          minlength="2"
           maxlength="40"
           pattern="^[а-яА-Яa-zA-Z-_]+$"
-          data-error-message="Можно использовать только буквы">
+          data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы">
           <span class="popup__user-error user_name-error">Необходимо заполнить данное поле</span>
           <input type="text" name="about" placeholder="О себе" class="popup__user" id="about_myself" 
           required 
-          minlength="5"
-          maxlength="40">
+          minlength="2"
+          maxlength="200"
+          pattern="^[а-яА-Яa-zA-Z-_]+$"
+          data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы">
           <span class="popup__user-error about_myself-error">Необходимо заполнить данное поле</span>
-        </fieldset>      
         <button class="popup__save" type="submit" aria-label="Кнопка сохранить">Сохранить</button>
+      </fieldset>
       </form>
     <button class="popup__close" type="button" aria-label="Кнопка закрыть форму"></button>
     </div>
@@ -66,15 +68,16 @@
         <fieldset class="popup__fields">
           <input type="text" name="namepage" placeholder="Название" class="popup__user" id="about_card" 
           required 
-          minlength="5"
-          maxlength="40">
+          minlength="2"
+          maxlength="30"
+          pattern="^[а-яА-Яa-zA-Z-_]+$"
+          data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы">
           <span class="popup__user-error about_card-error">Необходимо заполнить данное поле</span>
           <input type="url" name="link" placeholder="Ссылка на картинку" class="popup__user" id="link" 
-          required 
-          minlength="5">
-          <span class="popup__user-error link-error">Необходимо заполнить данное поле</span>
-        </fieldset>      
+          required>
+          <span class="popup__user-error link-error">Необходимо заполнить данное поле</span>    
         <button class="popup__save" type="submit" aria-label="Кнопка создать">Создать</button>
+      </fieldset>  
       </form>
     <button class="popup__close" type="button" aria-label="Кнопка закрыть форму"></button>
     </div>
@@ -101,5 +104,5 @@
     </article>
   </template>
 
-<script src="./pages/script.js"></script>
+<script type="module" src="./pages/script.js"></script>
 </body>

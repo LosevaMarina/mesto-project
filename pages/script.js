@@ -1,3 +1,5 @@
+(function (){
+
 //массив с карточки. добавляется при загрузке страницы
 const initialCards = [
     {
@@ -271,11 +273,12 @@ const hasInvalidInput = (inputList) => {
 //стилизация кнопки (активна-нет)
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    console.log ('да');
+    buttonElement.disabled = true;
     buttonElement.classList.add('popup__save_disabled');
   } else {
-    console.log ('нет');
+    buttonElement.disabled = false;
     buttonElement.classList.remove('popup__save_disabled');
   }
 };
 enableValidation();
+})();
