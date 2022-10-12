@@ -1,110 +1,183 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mesto Russia</title>
-  <link rel="icon" type="image/svg+xml" href="images/vector_logo.svg">
-</head>
-<body class="page">
-  <header class="header">
-    <img src="<%=require('./images/vector_logo.svg')%>" alt="Логотип Mesto Russia" class="header__logo">    
-  </header>
-  <main class="content">
-    <section class="profile">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesto Russia</title>
+    <link rel="icon" type="image/svg+xml" href="images/vector_logo.svg" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <img
+        src="<%=require('./images/vector_logo.svg')%>"
+        alt="Логотип Mesto Russia"
+        class="header__logo"
+      />
+    </header>
+    <main class="content">
+      <section class="profile">
         <div class="profile__avatar">
           <div class="profile__avatar">
-            <img class="profile__image"
+            <img
+              class="profile__image"
               src="<%=require('./images/kusto.jpg')%>"
-              alt="фото пользователя">
+              alt="фото пользователя"
+            />
           </div>
         </div>
         <div class="profile__info">
           <div class="profile__name-edit">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit" type="button" aria-label="кнопка редактирования профиля">
-            </button>
+            <button
+              class="profile__edit"
+              type="button"
+              aria-label="кнопка редактирования профиля"
+            ></button>
           </div>
-          <p class="profile__proffesion">Исследователь океана</p>          
-        </div>          
-      <button class="profile__add" type="button" aria-label="кнопка добавить">
-      </button>
-    </section>
-    
-    <section class="elements">
-     
-    </section>  
-  </main>
+          <p class="profile__proffesion">Исследователь океана</p>
+        </div>
+        <button
+          class="profile__add"
+          type="button"
+          aria-label="кнопка добавить"
+        ></button>
+      </section>
+
+      <section class="elements"></section>
+    </main>
     <footer class="footer">
-      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>          
-    </footer>    
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </footer>
 
-  <div class="popup popup_red">
-    <div class="popup__container">
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__form" name="edit_profile" method="post" novalidate> 
-        <fieldset class="popup__fields">
-          <input type="text" name="name" placeholder="Имя" class="popup__user" id="user_name" 
-          required 
-          minlength="2"
-          maxlength="40"
-          pattern="^[а-яА-Яa-zA-Z-_]+$"
-          data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы">
-          <span class="popup__user-error user_name-error">Необходимо заполнить данное поле</span>
-          <input type="text" name="about" placeholder="О себе" class="popup__user" id="about_myself" 
-          required 
-          minlength="2"
-          maxlength="200"
-          pattern="^[а-яА-Яa-zA-Z-_]+$"
-          data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы">
-          <span class="popup__user-error about_myself-error">Необходимо заполнить данное поле</span>
-        <button class="popup__save" type="submit" aria-label="Кнопка сохранить">Сохранить</button>
-      </fieldset>
-      </form>
-    <button class="popup__close" type="button" aria-label="Кнопка закрыть форму"></button>
-    </div>
-  </div>
-
-  <div class="popup popup_card">
-    <div class="popup__container">
-      <h2 class="popup__title">Новое место</h2>
-      <form class="popup__form" name="add_card" method="post" id="add_card_form" novalidate>
-        <fieldset class="popup__fields">
-          <input type="text" name="namepage" placeholder="Название" class="popup__user" id="about_card" 
-          required 
-          minlength="2"
-          maxlength="30"
-          pattern="^[а-яА-Яa-zA-Z-_]+$"
-          data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы">
-          <span class="popup__user-error about_card-error">Необходимо заполнить данное поле</span>
-          <input type="url" name="link" placeholder="Ссылка на картинку" class="popup__user" id="link" 
-          required>
-          <span class="popup__user-error link-error">Необходимо заполнить данное поле</span>    
-        <button class="popup__save" type="submit" aria-label="Кнопка создать">Создать</button>
-      </fieldset>  
-      </form>
-    <button class="popup__close" type="button" aria-label="Кнопка закрыть форму"></button>
-    </div>
-  </div>
-
-  <div class="popup popup_photo">
-    <div class="popup__container popup__container_photo">
-      <figure class="popup__figure">
-        <img class="popup__figure-img" src="#" alt="картинка">
-        <figcaption class="popup__figure-desc"></figcaption>
-      </figure>
-    <button class="popup__close" type="button" aria-label="Кнопка закрыть форму"></button>
-    </div>
-  </div>
-
-  <template class="cards-template">
-    <article class="element">
-      <img src="#" alt="#" class="element__photo">
-      <button class="element__delete" type="button"></button>
-      <div class="element__title-like">
-        <h2 class="element__title"></h2>
-        <button class="element__like" type="button"></button>
+    <div class="popup popup_red">
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__form" name="edit_profile" method="post" novalidate>
+          <fieldset class="popup__fields">
+            <input
+              type="text"
+              name="name"
+              placeholder="Имя"
+              class="popup__user"
+              id="user_name"
+              required
+              minlength="2"
+              maxlength="40"
+              pattern="^[а-яА-Яa-zA-Z-_]+$"
+              data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
+            />
+            <span class="popup__user-error user_name-error"
+              >Необходимо заполнить данное поле</span
+            >
+            <input
+              type="text"
+              name="about"
+              placeholder="О себе"
+              class="popup__user"
+              id="about_myself"
+              required
+              minlength="2"
+              maxlength="200"
+              pattern="^[а-яА-Яa-zA-Z-_]+$"
+              data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
+            />
+            <span class="popup__user-error about_myself-error"
+              >Необходимо заполнить данное поле</span
+            >
+            <button
+              class="popup__save"
+              type="submit"
+              aria-label="Кнопка сохранить"
+            >
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+        <button
+          class="popup__close"
+          type="button"
+          aria-label="Кнопка закрыть форму"
+        ></button>
       </div>
-    </article>
-  </template>
-</body>
+    </div>
+
+    <div class="popup popup_card">
+      <div class="popup__container">
+        <h2 class="popup__title">Новое место</h2>
+        <form
+          class="popup__form"
+          name="add_card"
+          method="post"
+          id="add_card_form"
+          novalidate
+        >
+          <fieldset class="popup__fields">
+            <input
+              type="text"
+              name="namepage"
+              placeholder="Название"
+              class="popup__user"
+              id="about_card"
+              required
+              minlength="2"
+              maxlength="30"
+              pattern="^[а-яА-Яa-zA-Z-_]+$"
+              data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
+            />
+            <span class="popup__user-error about_card-error"
+              >Необходимо заполнить данное поле</span
+            >
+            <input
+              type="url"
+              name="link"
+              placeholder="Ссылка на картинку"
+              class="popup__user"
+              id="link"
+              required
+            />
+            <span class="popup__user-error link-error"
+              >Необходимо заполнить данное поле</span
+            >
+            <button
+              class="popup__save"
+              type="submit"
+              aria-label="Кнопка создать"
+            >
+              Создать
+            </button>
+          </fieldset>
+        </form>
+        <button
+          class="popup__close"
+          type="button"
+          aria-label="Кнопка закрыть форму"
+        ></button>
+      </div>
+    </div>
+
+    <div class="popup popup_photo">
+      <div class="popup__container popup__container_photo">
+        <figure class="popup__figure">
+          <img class="popup__figure-img" src="#" alt="картинка" />
+          <figcaption class="popup__figure-desc"></figcaption>
+        </figure>
+        <button
+          class="popup__close"
+          type="button"
+          aria-label="Кнопка закрыть форму"
+        ></button>
+      </div>
+    </div>
+
+    <template class="cards-template">
+      <article class="element">
+        <img src="#" alt="#" class="element__photo" />
+        <button class="element__delete" type="button"></button>
+        <div class="element__title-like">
+          <h2 class="element__title"></h2>
+          <button class="element__like" type="button"></button>
+        </div>
+      </article>
+    </template>
+  </body>
+</html>
