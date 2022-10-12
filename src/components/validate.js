@@ -31,7 +31,7 @@ export function enableValidation(obj) {
     );
     const buttonElement = formElement.querySelector(obj.submitButtonSelector);
     toggleButtonState(inputList, buttonElement);
-    formElement.addEventListener("reset", () => {
+    formElement.addEventListener('reset', () => {
       setTimeout(() => {
         toggleButtonState(inputList, buttonElement);
       }, 0);
