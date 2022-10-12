@@ -1,7 +1,7 @@
 import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
 import { createCardElement } from "./card.js";
-import { initialCards } from "./cardsarray.js";
+import { initialCards } from "./cardsArray.js";
 
 //задаем переменные имя и профессия на странице
 const profileName = document.querySelector(".profile__name");
@@ -71,9 +71,6 @@ formEditProfile.addEventListener("submit", (evt) => {
   closePopup(popupRedact);
   // Отменим стандартное поведение по сабмиту
   evt.preventDefault();
-
-  
-  formEditProfile.reset();
 });
 
 formAddCard.addEventListener("submit", (evt) => {

@@ -5,6 +5,7 @@ export function enableValidation(obj) {
     element.classList.add(obj.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(obj.errorClass);
+    inputSelector.classList.add("popup__user_error");
   };
 
   //функция скрытия ошибки
@@ -13,6 +14,7 @@ export function enableValidation(obj) {
     element.classList.remove(obj.inputErrorClass);
     errorElement.classList.remove(obj.errorClass);
     errorElement.textContent = "";
+    inputSelector.classList.remove("popup__user_error");
   };
 
   //функция которая проверяет валидность поля

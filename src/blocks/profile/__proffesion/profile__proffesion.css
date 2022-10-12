@@ -1,28 +1,26 @@
 .profile__proffesion {
-    margin: 0;
-    max-width: 336px;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden; 
+  margin: 0;
+  max-width: 336px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-@media (max-width: 950px)
-{
-.profile__proffesion {
+@media (max-width: 950px) {
+  .profile__proffesion {
     text-align: center;
     margin: 0 auto;
-}
+  }
 }
 
-@media (min-width: 320px) and (max-width: 768px)
-{
-.profile__proffesion {
+@media (min-width: 320px) and (max-width: 768px) {
+  .profile__proffesion {
     font-size: 14px;
     line-height: 17px;
     max-width: 282px;
-}
+  }
 }

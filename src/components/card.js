@@ -1,9 +1,10 @@
 import { openPopup } from "./modal.js";
 
+const popupImage = document.querySelector(".popup__figure-img");
+const popupImageName = document.querySelector(".popup__figure-desc");
+const popupPhotoFullSize = document.querySelector(".popup_photo");
+
 export function createCardElement(name, link) {
-  const popupImage = document.querySelector(".popup__figure-img");
-  const popupImageName = document.querySelector(".popup__figure-desc");
-  const popupPhotoFullSize = document.querySelector(".popup_photo");
   const cardElement = document.querySelector(".cards-template").content;
   const cardEl = cardElement.querySelector(".element").cloneNode(true);
   const elPhoto = cardEl.querySelector(".element__photo");
@@ -17,18 +18,16 @@ export function createCardElement(name, link) {
   });
 
   //Просмотр картинки
-  elPhoto.addEventListener("click", (evt) => {
-    const pic = evt.target;
+  elPhoto.addEventListener("click", () => {
     openPopup(popupPhotoFullSize);
-    popupImage.src = pic.getAttribute("src");
-    popupImage.alt = pic.getAttribute("alt");
-    popupImageName.textContent = pic.alt;
+    popupImage.src = link;
+    popupImage.alt = name;
+    popupImageName.textContent = name;
   });
 
   //Удаление
   cardEl.querySelector(".element__delete").addEventListener("click", (evt) => {
-    const revDiv = evt.target.closest(".element");
-    revDiv.remove();
+    cardEl.remove();
   });
 
   return cardEl;

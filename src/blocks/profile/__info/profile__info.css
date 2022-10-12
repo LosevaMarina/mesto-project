@@ -1,14 +1,12 @@
 .profile__info {
-    margin: 0;
-    margin-right: 244px;
-    display: flex;
-    flex-direction: column;
+  margin: 0;
+  margin-right: 244px;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (max-width: 950px)
-{
-.profile__info {
+@media (max-width: 950px) {
+  .profile__info {
     margin: 22.25px auto 36px;
-
-}
+  }
 }

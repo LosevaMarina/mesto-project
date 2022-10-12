@@ -1,12 +1,18 @@
 .popup__user-error {
-    display: none;
-    margin: 0;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 15px;
-    margin: 0;
-    margin-bottom: 13px;
-    color: #FF0000;
+  display: none;
+  margin: 0;
+  padding-top: 5px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  min-height: 30px;
+  /*margin-bottom: 13px;*/
+  color: #ff0000;
 }
+/*.popup__input-error {
+  padding-top: 5px;
+  margin: 0 36px 0 36px;
+  opacity: 0;
+  transition: .3s;
+  }*/

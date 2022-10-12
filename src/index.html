@@ -58,7 +58,7 @@
               type="text"
               name="name"
               placeholder="Имя"
-              class="popup__user"
+              class="popup__user popup__user_error"
               id="user_name"
               required
               minlength="2"
@@ -66,14 +66,14 @@
               pattern="^[а-яА-Яa-zA-Z-_]+$"
               data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
             />
-            <span class="popup__user-error user_name-error"
-              >Необходимо заполнить данное поле</span
+            <p class="popup__user-error user_name-error"
+              >Необходимо заполнить данное поле</p
             >
             <input
               type="text"
               name="about"
               placeholder="О себе"
-              class="popup__user"
+              class="popup__user popup__user_error" 
               id="about_myself"
               required
               minlength="2"
@@ -81,8 +81,8 @@
               pattern="^[а-яА-Яa-zA-Z-_]+$"
               data-error-message="Можно использовать только латинские буквы, кириллические буквы, знаки дефиса и пробелы"
             />
-            <span class="popup__user-error about_myself-error"
-              >Необходимо заполнить данное поле</span
+            <p class="popup__user-error about_myself-error"
+              >Необходимо заполнить данное поле</p
             >
             <button
               class="popup__save"
