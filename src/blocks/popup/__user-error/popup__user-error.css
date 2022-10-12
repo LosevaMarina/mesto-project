@@ -1,7 +1,6 @@
 .popup__user-error {
   /*display: none;*/
-  display: flex;
-  visibility: hidden;
+  position: absolute;
   margin: 0;
   padding-top: 5px;
   font-family: "Inter";

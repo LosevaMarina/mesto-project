@@ -23,7 +23,7 @@ export function enableValidation(obj) {
       hideInputError(formElement, element);
     }
   };
-
+  
   //поиск всех полей формы
   const setEventListeners = (formElement) => {
     const inputList = Array.from(
@@ -31,12 +31,12 @@ export function enableValidation(obj) {
     );
     const buttonElement = formElement.querySelector(obj.submitButtonSelector);
     toggleButtonState(inputList, buttonElement);
+    formElement.addEventListener("reset", () => {
+      setTimeout(() => {
+        toggleButtonState(inputList, buttonElement);
+      }, 0);
+    });
     inputList.forEach((element) => {
-      formElement.addEventListener("reset", () => {
-        setTimeout(() => {
-          toggleButtonState(inputList, buttonElement);
-        }, 0);
-      });
       element.addEventListener("input", function () {
         isValid(formElement, element);
         toggleButtonState(inputList, buttonElement);
