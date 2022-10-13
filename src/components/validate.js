@@ -23,7 +23,7 @@ export function enableValidation(obj) {
       hideInputError(formElement, element);
     }
   };
-  
+   
   //поиск всех полей формы
   const setEventListeners = (formElement) => {
     const inputList = Array.from(

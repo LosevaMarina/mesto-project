@@ -1,3 +1,4 @@
 .popup__user-error_active {
   display: flex;
+  /*visibility: hidden;*/
 }
