@@ -22,6 +22,7 @@
               class="profile__image"
               src="<%=require('./images/kusto.jpg')%>"
               alt="фото пользователя"
+              id="avatar_image"
             />
           </div>
         </div>
@@ -160,6 +161,38 @@
         ></button>
       </div>
     </div>
+
+    <div class="popup popup_avatar">
+      <div class="popup__container">
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__form" name="avatar" novalidate>
+          <fieldset class="popup__fields">
+            <input
+              type="url"
+              name="link"
+              placeholder="Ссылка на аватар"
+              class="popup__user popup__user_avatar"
+              id="avatar_link"
+              required
+            />
+            <p class="popup__user-error avatar_link-error"></p>
+            <button
+              class="popup__save popup__save_avatar"
+              type="submit"
+              aria-label="Кнопка сохранить"
+            >
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+        <button
+          class="popup__close"
+          type="button"
+          aria-label="Кнопка закрыть форму"
+        ></button>
+      </div>
+    </div>
+
 
     <template class="cards-template">
       <article class="element">

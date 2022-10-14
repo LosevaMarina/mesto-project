@@ -6,11 +6,14 @@ import { initialCards } from "./cardsArray.js";
 //задаем переменные имя и профессия на странице
 const profileName = document.querySelector(".profile__name");
 const profileProf = document.querySelector(".profile__proffesion");
+//переменная фото аватара
+const photoAvatar = document.querySelector(".profile__image");
 
 //модалки
 const popupRedact = document.querySelector(".popup_red");
 const popupCard = document.querySelector(".popup_card");
 const popupPhoto = document.querySelector(".popup_photo");
+const popupAvatar = document.querySelector(".popup_avatar");
 const popupLike = document.querySelector(".element__like");
 
 //редактирование формы
@@ -23,6 +26,10 @@ const formAddCard = document.forms.add_card; //получили форму
 const namePage = formAddCard.elements.namepage; //получили элемент формы имя
 const linkPage = formAddCard.elements.link;
 
+//изменение аватара
+const avatarChangeForm = document.forms.avatar; //получили форму
+const linkAvatar = formAddCard.elements.avatar_link;
+
 //кнопка редактировать
 const buttonRedact = document.querySelector(".profile__edit");
 buttonRedact.addEventListener("click", (evt) => {
@@ -30,6 +37,12 @@ buttonRedact.addEventListener("click", (evt) => {
   about.value = profileProf.textContent;
   openPopup(popupRedact);
 });
+
+//кнопка открыть аватар
+const redactAvatar = document.querySelector(".profile__avatar");
+redactAvatar.addEventListener("click", (evt) => {
+  openPopup(popupAvatar);
+})
 
 //кнопка добавить
 const buttonAdd = document.querySelector(".profile__add");
@@ -65,6 +78,13 @@ function submitCardFormHandler(evt) {
   cardsContainer.prepend(createCardElement(namePage.value, linkPage.value));
 }
 
+//функция изменения аватара
+function avatarChangeFormHandler (evt) {
+  evt.preventDefault();
+  photoAvatar.src = linkAvatar;
+}
+
+
 //слушатели кнопок
 formEditProfile.addEventListener("submit", (evt) => {
   submitRedactFormHandler(evt);
@@ -80,6 +100,15 @@ formAddCard.addEventListener("submit", (evt) => {
   evt.preventDefault();
   evt.target.reset();
 });
+
+avatarChangeForm.addEventListener("submit", (evt) => {
+  avatarChangeFormHandler(evt);
+  closePopup(popupAvatar);
+  // Отменим стандартное поведение по сабмиту
+  evt.preventDefault();
+  evt.target.reset();
+});
+
 
 //подвключение валидации полей в модальных окнах
 enableValidation({
