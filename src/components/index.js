@@ -2,18 +2,21 @@ import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
 import { createCardElement } from "./card.js";
 import { initialCards } from "./cardsArray.js";
+import { changeAvatar, changeProfileInfo } from "./api.js";
+
 
 //задаем переменные имя и профессия на странице
 const profileName = document.querySelector(".profile__name");
 const profileProf = document.querySelector(".profile__proffesion");
 //переменная фото аватара
 const photoAvatar = document.querySelector(".profile__image");
+const avatarLink = document.getElementById("avatar_link");
+const popupAvatar = document.querySelector(".popup_avatar");
 
 //модалки
 const popupRedact = document.querySelector(".popup_red");
 const popupCard = document.querySelector(".popup_card");
 const popupPhoto = document.querySelector(".popup_photo");
-const popupAvatar = document.querySelector(".popup_avatar");
 const popupLike = document.querySelector(".element__like");
 
 //редактирование формы
@@ -58,11 +61,27 @@ for (let i = 0; i < closeButtonList.length; i++)
     closePopup(evt.target.closest(".popup"));
   });
 
-//функция редактирование формы
+//функция редактирование формы, отправка формы
 function submitRedactFormHandler(evt) {
   evt.preventDefault();
-  profileName.textContent = name.value;
-  profileProf.textContent = about.value;
+  const submitButton = evt.submitter;
+  const defaultButtonText = submitButton.textContent;
+  renderLoading(true, submitButton);
+  changeProfileInfo({ name: name.value, about: about.value })
+    .then((res) => {
+      profileName.textContent = res.name;
+      profileProf.textContent = res.about;
+      evt.target.reset();
+      closePopup(evt.target);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, submitButton, defaultButtonText);
+    });
+
+
 }
 
 //вставка изначальных карточек
@@ -78,11 +97,35 @@ function submitCardFormHandler(evt) {
   cardsContainer.prepend(createCardElement(namePage.value, linkPage.value));
 }
 
-//функция изменения аватара
-function avatarChangeFormHandler (evt) {
+//функция изменения аватара, отправка нового
+function submitAvatarHandler (evt) {
   evt.preventDefault();
-  photoAvatar.src = linkAvatar;
+  const submitButton = evt.submitter;
+  const defaultButtonText = submitButton.textContent;
+  renderLoading(true, submitButton); //изменение текста кнопки при сохранении
+  changeAvatar(avatarLink.value)
+    .then((res) => {
+      photoAvatar.src = res.popupAvatar;
+      evt.target.reset();
+      closePopup(evt.target);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, submitButton, defaultButtonText);
+    });
 }
+
+//функция изменения текста кнопки при сохранении
+function renderLoading(isLoading, submitButton, defaultButtonText) {
+  if (isLoading) {
+    submitButton.textContent = "Сохранение...";
+  } else {
+    submitButton.textContent = defaultButtonText;
+  }
+}
+
 
 
 //слушатели кнопок
@@ -102,7 +145,7 @@ formAddCard.addEventListener("submit", (evt) => {
 });
 
 avatarChangeForm.addEventListener("submit", (evt) => {
-  avatarChangeFormHandler(evt);
+  submitAvatarHandler(evt);
   closePopup(popupAvatar);
   // Отменим стандартное поведение по сабмиту
   evt.preventDefault();
