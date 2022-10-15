@@ -8,11 +8,10 @@ import { changeAvatar, changeProfileInfo } from "./api.js";
 //задаем переменные имя и профессия на странице
 const profileName = document.querySelector(".profile__name");
 const profileProf = document.querySelector(".profile__proffesion");
-//переменная фото аватара
+//аватар
 const photoAvatar = document.querySelector(".profile__image");
 const avatarLink = document.getElementById("avatar_link");
 const popupAvatar = document.querySelector(".popup_avatar");
-
 //модалки
 const popupRedact = document.querySelector(".popup_red");
 const popupCard = document.querySelector(".popup_card");
@@ -72,7 +71,7 @@ function submitRedactFormHandler(evt) {
       profileName.textContent = res.name;
       profileProf.textContent = res.about;
       evt.target.reset();
-      closePopup(evt.target);
+      closePopup(popupRedact);
     })
     .catch((err) => {
       console.log(err);
@@ -80,8 +79,6 @@ function submitRedactFormHandler(evt) {
     .finally(() => {
       renderLoading(false, submitButton, defaultButtonText);
     });
-
-
 }
 
 //вставка изначальных карточек
@@ -107,7 +104,8 @@ function submitAvatarHandler (evt) {
     .then((res) => {
       photoAvatar.src = res.popupAvatar;
       evt.target.reset();
-      closePopup(evt.target);
+      //closePopup(evt.target);
+      closePopup(popupAvatar);
     })
     .catch((err) => {
       console.log(err);
@@ -129,12 +127,7 @@ function renderLoading(isLoading, submitButton, defaultButtonText) {
 
 
 //слушатели кнопок
-formEditProfile.addEventListener("submit", (evt) => {
-  submitRedactFormHandler(evt);
-  closePopup(popupRedact);
-  // Отменим стандартное поведение по сабмиту
-  evt.preventDefault();
-});
+popupRedact.addEventListener("submit", submitRedactFormHandler);
 
 formAddCard.addEventListener("submit", (evt) => {
   submitCardFormHandler(evt);
@@ -144,13 +137,7 @@ formAddCard.addEventListener("submit", (evt) => {
   evt.target.reset();
 });
 
-avatarChangeForm.addEventListener("submit", (evt) => {
-  submitAvatarHandler(evt);
-  closePopup(popupAvatar);
-  // Отменим стандартное поведение по сабмиту
-  evt.preventDefault();
-  evt.target.reset();
-});
+popupAvatar.addEventListener("submit", submitAvatarHandler);
 
 
 //подвключение валидации полей в модальных окнах
