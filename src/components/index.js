@@ -104,8 +104,8 @@ function submitAvatarHandler (evt) {
     .then((res) => {
       photoAvatar.src = res.popupAvatar;
       evt.target.reset();
-      closePopup(evt.target);
-      //closePopup(popupAvatar);
+      //closePopup(evt.target);
+      closePopup(popupAvatar);
     })
     .catch((err) => {
       console.log(err);
