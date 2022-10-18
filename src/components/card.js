@@ -15,8 +15,7 @@ export function createCardElement(card, userId) {
   elPhoto.alt = card.name;
   elPhoto.src = card.link;
   const thisIsUser = card.owner._id === userId;
-  const numberOfLikes = cardEl.querySelector(".element__like-numbers");
-  numberOfLikes.textContent = card.likes.length;
+  cardEl.querySelector(".element__like-numbers").textContent = card.likes.length;
   const likeActive = "element__like_active";
 
   //Лайк
@@ -33,7 +32,7 @@ export function createCardElement(card, userId) {
     if (buttonLike.classList.contains(likeActive)) {
       deleteLike(card._id) //удалить лайк если активен
         .then((res) => {
-          numberOfLikes.textContent = res.likes.length;
+          cardEl.querySelector(".element__like-numbers").textContent = res.likes.length;
           buttonLike.classList.remove(likeActive);
           //evt.target.classList.toggle("element__like_active");
         })
@@ -43,7 +42,7 @@ export function createCardElement(card, userId) {
     } else {
       countLikes(card._id)
         .then((res) => {
-          numberOfLikes.textContent = res.likes.length;
+          cardEl.querySelector(".element__like-numbers").textContent = res.likes.length;
           buttonLike.classList.add(likeActive);
           //evt.target.classList.toggle("element__like_active");
         })
