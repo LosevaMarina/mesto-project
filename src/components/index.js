@@ -1,22 +1,28 @@
 import { enableValidation } from "./validate.js";
 import { openPopup, closePopup } from "./modal.js";
 import { createCardElement } from "./card.js";
-import { getUserInfo, getInitialCards, changeAvatar, changeProfileInfo, postNewCard } from "./api.js"
+import {
+  aboutUser,
+  initialCards,
+  addAvatar,
+  changeProfile,
+  addNewPlace,
+} from "./api.js";
 
 //задаем переменные имя и профессия на странице
 const profileName = document.querySelector(".profile__name");
 const profileProf = document.querySelector(".profile__proffesion");
+let userId;
+
 //аватар
 const photoAvatar = document.querySelector(".profile__image");
 const avatarLink = document.getElementById("avatar_link");
 const popupAvatar = document.querySelector(".popup_avatar");
+
 //модалки
 const popupRedact = document.querySelector(".popup_red");
 const popupCard = document.querySelector(".popup_card");
-const popupPhoto = document.querySelector(".popup_photo");
-const popupLike = document.querySelector(".element__like");
 const cardsContainer = document.querySelector(".elements");
-
 
 //редактирование формы
 const formEditProfile = document.forms.edit_profile; //получили форму
@@ -27,11 +33,6 @@ const about = formEditProfile.elements.about;
 const formAddCard = document.forms.add_card; //получили форму
 const namePage = formAddCard.elements.namepage; //получили элемент формы имя
 const linkPage = formAddCard.elements.link;
-
-
-//изменение аватара
-//const avatarChangeForm = document.forms.avatar; //получили форму
-//const linkAvatar = formAddCard.elements.avatar_link;
 
 //кнопка редактировать
 const buttonRedact = document.querySelector(".profile__edit");
@@ -45,39 +46,13 @@ buttonRedact.addEventListener("click", (evt) => {
 const redactAvatar = document.querySelector(".profile__avatar");
 redactAvatar.addEventListener("click", (evt) => {
   openPopup(popupAvatar);
-})
+});
 
 //кнопка добавить новое место
 const buttonAdd = document.querySelector(".profile__add");
 buttonAdd.addEventListener("click", (evt) => {
   openPopup(popupCard);
-  //setSubmitButtonState(false);
 });
-
-
-// Отправка формы нового места
-function submitNewPlaceHandler(evt) {
-  evt.preventDefault();
-  const submitButton = evt.submitter;
-  const defaultButtonText = submitButton.textContent;
-  renderLoading(true, submitButton);
-  postNewCard({
-    name: name.value,
-    link: url.value,
-  })
-    .then((res) => {
-      const card = createCardElement(res, userId);
-      submitCardFormHandler(cardsContainer, card);
-      evt.target.reset(); //очистка полей формы после отправки
-      closePopup(popupCard);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    .finally(() => {
-      renderLoading(false, submitButton, defaultButtonText);
-    });
-}
 
 //кнопка закрыть
 const closeButtonList = document.querySelectorAll(".popup__close");
@@ -86,13 +61,33 @@ for (let i = 0; i < closeButtonList.length; i++)
     closePopup(evt.target.closest(".popup"));
   });
 
+//функция изменения аватара, отправка нового
+function submitAvatarHandler(evt) {
+  evt.preventDefault();
+  const submitButton = evt.submitter;
+  const textDefault = submitButton.textContent;
+  renderLoading(true, submitButton);
+  addAvatar(avatarLink.value)
+    .then((res) => {
+      photoAvatar.src = res.avatar;
+      evt.target.reset();
+      closePopup(popupAvatar);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, submitButton, textDefault);
+    });
+}
+
 //функция редактирование формы, отправка формы
 function submitRedactFormHandler(evt) {
   evt.preventDefault();
   const submitButton = evt.submitter;
-  const defaultButtonText = submitButton.textContent;
+  const textDefault = submitButton.textContent;
   renderLoading(true, submitButton);
-  changeProfileInfo({ name: name.value, about: about.value })
+  changeProfile({ name: name.value, about: about.value })
     .then((res) => {
       profileName.textContent = res.name;
       profileProf.textContent = res.about;
@@ -103,12 +98,12 @@ function submitRedactFormHandler(evt) {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false, submitButton, defaultButtonText);
+      renderLoading(false, submitButton, textDefault);
     });
 }
 
 //вставка изначальных карточек
-Promise.all([getUserInfo(), getInitialCards()])
+Promise.all([aboutUser(), initialCards()])
   .then(([userData, cards]) => {
     profileName.textContent = userData.name;
     profileProf.textContent = userData.about;
@@ -122,41 +117,45 @@ Promise.all([getUserInfo(), getInitialCards()])
     console.log("тупишь, мать");
   });
 
+  
 //функция добавления новой картинки
 function submitCardFormHandler(сontainer, element) {
   сontainer.prepend(element);
 }
 
-//функция изменения аватара, отправка нового
-function submitAvatarHandler (evt) {
+// Отправка формы нового места
+function submitNewPlaceHandler(evt) {
   evt.preventDefault();
   const submitButton = evt.submitter;
-  const defaultButtonText = submitButton.textContent;
+  const textDefault = submitButton.textContent;
   renderLoading(true, submitButton);
-  changeAvatar(avatarLink.value)
+  addNewPlace({
+    name: namePage.value,
+    link: linkPage.value,
+  })
     .then((res) => {
-      photoAvatar.src = res.avatar;
-      evt.target.reset();
-      //closePopup(evt.target);
-      closePopup(popupAvatar);
+      console.log("зашли");
+      const card = createCardElement(res, userId);
+      submitCardFormHandler(cardsContainer, card);
+      evt.target.reset(); //очистка полей формы после отправки
+      closePopup(popupCard);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      renderLoading(false, submitButton, defaultButtonText);
+      renderLoading(false, submitButton, textDefault);
     });
 }
 
 //функция изменения текста кнопки при сохранении
-function renderLoading(isLoading, submitButton, defaultButtonText) {
-  if (isLoading) {
+function renderLoading(loading, submitButton, textDefault) {
+  if (loading) {
     submitButton.textContent = "Сохранение...";
   } else {
-    submitButton.textContent = defaultButtonText;
+    submitButton.textContent = textDefault;
   }
 }
-
 
 //слушатели кнопок
 popupRedact.addEventListener("submit", submitRedactFormHandler);

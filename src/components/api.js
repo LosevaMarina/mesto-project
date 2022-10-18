@@ -1,9 +1,8 @@
-
 const config = {
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-14",
+  baseUrl: "https://nomoreparties.co/v1/plus-cohort-15",
   headers: {
     "Content-Type": "application/json",
-    authorization: "470054f7-da60-4b7e-8b85-db5a83cb835c"
+    authorization: "adaf66c3-22ed-4809-98aa-d871184da784",
   },
 };
 
@@ -18,7 +17,19 @@ function request(url, options) {
   return fetch(url, options).then(check);
 }
 
-export const changeAvatar = (link) => {
+export const aboutUser = () => {
+  return request(`${config.baseUrl}/users/me`, {
+    headers: config.headers,
+  });
+};
+
+export const initialCards = () => {
+  return request(`${config.baseUrl}/cards`, {
+    headers: config.headers,
+  });
+};
+
+export const addAvatar = (link) => {
   return request(`${config.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: config.headers,
@@ -28,7 +39,7 @@ export const changeAvatar = (link) => {
   });
 };
 
-export const changeProfileInfo = (info) => {
+export const changeProfile = (info) => {
   return request(`${config.baseUrl}/users/me`, {
     method: "PATCH",
     headers: config.headers,
@@ -43,33 +54,21 @@ export const deleteLike = (cardId) => {
   });
 };
 
-export const deleteCard = (cardId) => {
+export const deleteNewPlace = (cardId) => {
   return request(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
     headers: config.headers,
   });
 };
 
-export const setLike = (cardId) => {
+export const countLikes = (cardId) => {
   return request(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: "PUT",
     headers: config.headers,
   });
 };
 
-export const getInitialCards = () => {
-  return request(`${config.baseUrl}/cards`, {
-    headers: config.headers,
-  });
-};
-
-export const getUserInfo = () => {
-  return request(`${config.baseUrl}/users/me`, {
-    headers: config.headers,
-  });
-};
-
-export const postNewCard = (card) => {
+export const addNewPlace = (card) => {
   return request(`${config.baseUrl}/cards`, {
     method: "POST",
     headers: config.headers,
