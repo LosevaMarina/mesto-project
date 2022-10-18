@@ -3,6 +3,36 @@
   height: 120px;
   border-radius: 50%;
   margin-right: 30px;
+  display: block;
+  position: relative;
+}
+
+.profile__avatar:before {
+  z-index: 1;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url(../../../images/edit-icon.svg) no-repeat center;
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+.profile__avatar:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 0.2s linear;
+}
+.profile__avatar:hover:before,
+.profile__avatar:hover:after {
+  opacity: 0.5;
 }
 
 @media (max-width: 950px) {
