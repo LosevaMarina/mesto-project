@@ -3,14 +3,14 @@ export function openPopup(popup) {
   popup.classList.add("popup_active");
   //слушатели нажатия на Esc и мышь
   document.addEventListener("keydown", closeOnEscape);
-  document.addEventListener("mousedown", closeOnOverlay);
+  popup.addEventListener("mousedown", closeOnOverlay);
 }
 
 //функция закрыть popup
 export function closePopup(popup) {
   popup.classList.remove("popup_active");
   document.removeEventListener("keydown", closeOnEscape);
-  document.removeEventListener("mousedown", closeOnOverlay);
+  popup.removeEventListener("mousedown", closeOnOverlay);
 }
 
 //закрытие попапа при нажатии на Esc

@@ -156,12 +156,6 @@ function renderLoading(loading, submitButton, textDefault) {
     submitButton.textContent = textDefault;
   }
 }
-
-//слушатели кнопок
-popupRedact.addEventListener("submit", submitRedactFormHandler);
-popupAvatar.addEventListener("submit", submitAvatarHandler);
-popupCard.addEventListener("submit", submitNewPlaceHandler);
-
 //подвключение валидации полей в модальных окнах
 enableValidation({
   formSelector: ".popup__form",
@@ -171,3 +165,10 @@ enableValidation({
   inputErrorClass: "popup__user_disabled",
   errorClass: "popup__user-error_active",
 });
+
+//слушатели кнопок
+popupRedact.addEventListener("submit", submitRedactFormHandler);
+popupAvatar.addEventListener("submit", submitAvatarHandler);
+popupCard.addEventListener("submit", submitNewPlaceHandler);
+
+

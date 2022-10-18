@@ -4,9 +4,9 @@ import { deleteLike, deleteNewPlace, countLikes } from "./api.js";
 const popupImage = document.querySelector(".popup__figure-img");
 const popupImageName = document.querySelector(".popup__figure-desc");
 const popupPhotoFullSize = document.querySelector(".popup_photo");
+const cardElement = document.querySelector(".cards-template").content; //получаю содержимое шаблона
 
-export function createCardElement(card, userId) {
-  const cardElement = document.querySelector(".cards-template").content; //получаю содержимое шаблона
+export function createCardElement(card, userId) { 
   const cardEl = cardElement.querySelector(".element").cloneNode(true); //клонирую
   cardEl.querySelector(".element__title").textContent = card.name;
   const elPhoto = cardEl.querySelector(".element__photo");
